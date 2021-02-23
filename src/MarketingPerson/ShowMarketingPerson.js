@@ -2,7 +2,11 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import Modals from "../Modals/Modals";
 
-import { deleteMarketingPersonService, getAllMarketingPerson, updateMarketingPersonService } from "../services/marketingPerson";
+import {
+  deleteMarketingPersonService,
+  getAllMarketingPerson,
+  updateMarketingPersonService,
+} from "../services/marketingPerson";
 
 import MaterialTable from "../Table/Table";
 
@@ -11,10 +15,9 @@ function ShowMarketingPerson() {
   const [Users, setUsers] = useState([]);
 
   // const rows = Users?{...Users}
-  const [edit,setEdit] = useState(['name',"contact"])
+  const [edit, setEdit] = useState(["name", "contact"]);
 
   const [columns, setColumns] = useState([
-  
     { id: "name", label: "Marketing Person", minWidth: 150 },
     { id: "contact", label: "Contact", minWidth: 150 },
     {
@@ -32,19 +35,25 @@ function ShowMarketingPerson() {
   useEffect(() => {
     getAllMarketingPerson()
       .then((response) => {
-          console.log("contactper",response.data)
-
-      
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
               <Button variant="contained" color="primary">
-                <Modals editable={edit}  onhandleUpdate={handleUpdate} name={"edit"} data={value} />
+                <Modals
+                  editable={edit}
+                  onhandleUpdate={handleUpdate}
+                  name={"edit"}
+                  data={value}
+                />
               </Button>
             ),
             delete: (
-              <Button onClick={()=>handleDelete(value.id)} variant="contained" color="secondary">
+              <Button
+                onClick={() => handleDelete(value.id)}
+                variant="contained"
+                color="secondary"
+              >
                 Delete
               </Button>
             ),
@@ -69,7 +78,6 @@ function ShowMarketingPerson() {
   }, []);
 
   const handleDelete = (id) => {
-   
     deleteMarketingPersonService(id)
       .then((response) => {
         setUsers((prevstate) => {
@@ -82,14 +90,12 @@ function ShowMarketingPerson() {
         console.log("Something went wrong. Please try again later.");
       });
   };
-  const handleUpdate = (id,val) => {
-    
+  const handleUpdate = (id, val) => {
     updateMarketingPersonService(id, val)
       .then((response) => {
-       
         setUsers((prevstate) => {
           return prevstate.map((user) => {
-            return user.id === response.id ? {...user,...response} : user;
+            return user.id === response.id ? { ...user, ...response } : user;
           });
         });
       })

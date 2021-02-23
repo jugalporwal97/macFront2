@@ -1,7 +1,11 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 
-import { deleteInspectorService, getAllInspector, updateInspectorService } from "../services/inspector";
+import {
+  deleteInspectorService,
+  getAllInspector,
+  updateInspectorService,
+} from "../services/inspector";
 
 import MaterialTable from "../Table/Table";
 
@@ -30,12 +34,10 @@ function ShowInspector() {
   useEffect(() => {
     getAllInspector()
       .then((response) => {
-        console.log("Bankdata", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
-  
               <Button
                 variant="contained"
                 onClick={() => {
@@ -59,7 +61,7 @@ function ShowInspector() {
             ),
           };
         });
-        console.log("body", body);
+
         setCities(body);
       })
       .catch((error) => {
@@ -86,7 +88,7 @@ function ShowInspector() {
       .then((response) => {
         setCities((prevstate) => {
           return prevstate.map((city) => {
-            return city.id === response.id ? {...city,...response} : city;
+            return city.id === response.id ? { ...city, ...response } : city;
           });
         });
 

@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 export default function Modals(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
-  const [val,setval] = React.useState(props.data)
+  const [val, setval] = React.useState(props.data);
 
   const handleClickOpen = () => () => {
     setOpen(true);
@@ -19,11 +19,11 @@ export default function Modals(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = (v,e) => {
-    let temp = e.target.value
-    setval((old)=>{return{...old,[v]:temp}})
- 
- 
+  const handleClick = (v, e) => {
+    let temp = e.target.value;
+    setval((old) => {
+      return { ...old, [v]: temp };
+    });
   };
   const descriptionElementRef = React.useRef(null);
   React.useEffect(() => {
@@ -34,9 +34,7 @@ export default function Modals(props) {
       }
     }
   }, [open]);
-console.log("editable",props.editable)
 
- 
   return (
     <div>
       <Button onClick={handleClickOpen()}>{props.name}</Button>
@@ -53,32 +51,34 @@ console.log("editable",props.editable)
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
-            tabIndex={-1}s
+            tabIndex={-1}
+            s
           >
-            {Object.entries(val).map(([k,v])=>{return ((props.editable).includes(k)?<TextField key={k}
-            variant="outlined"
-            margin="normal"
-            
-            inputProps={{
-              style: { margin: '10px' },
-            }}
-        
-            value={v}
-            onChange={(e)=>handleClick(k,e)}
-
-          />:null)})}
-         
-
-
+            {Object.entries(val).map(([k, v]) => {
+              return props.editable.includes(k) ? (
+                <TextField
+                  key={k}
+                  variant="outlined"
+                  margin="normal"
+                  inputProps={{
+                    style: { margin: "10px" },
+                  }}
+                  value={v}
+                  onChange={(e) => handleClick(k, e)}
+                />
+              ) : null;
+            })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>props.onhandleUpdate(val.id,val)} color="primary">
-          {/* <Button  color="primary"> */}
-
+          <Button
+            onClick={() => props.onhandleUpdate(val.id, val)}
+            color="primary"
+          >
+            {/* <Button  color="primary"> */}
             Update
           </Button>
         </DialogActions>

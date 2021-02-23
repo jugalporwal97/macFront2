@@ -1,19 +1,23 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import Modals from "../Modals/Modals";
-import { deleteBranchesService, getAllBranches, updateBranchesService } from "../services/branches";
+import {
+  deleteBranchesService,
+  getAllBranches,
+  updateBranchesService,
+} from "../services/branches";
 
 import MaterialTable from "../Table/Table";
 
-function ShowBranches() {
+function ShowBranches(props) {
   //   const [row, setrow] = useState(initialState);
+
   const [Users, setUsers] = useState([]);
 
   // const rows = Users?{...Users}
-  const [edit,setEdit] = useState(['name',"bankId"])
+  const [edit, setEdit] = useState(["name", "bankId"]);
 
   const [columns, setColumns] = useState([
-  
     { id: "name", label: "BranchName", minWidth: 150 },
     { id: "bankId", label: "Bank", minWidth: 150 },
     {
@@ -31,18 +35,26 @@ function ShowBranches() {
   useEffect(() => {
     getAllBranches()
       .then((response) => {
-          console.log("responsedatabranches",response.data)
-      
-        const body = Object.values(response.data).map((value) => {
+        const body = Object.values(response.data).map((val) => {
           return {
-            ...value,
+            ...val,
+            bankId: props?.value.find((obj) => obj.val == val.bankId)?.payload,
             edit: (
               <Button variant="contained" color="primary">
-                <Modals editable={edit}  onhandleUpdate={handleUpdate} name={"edit"} data={value} />
+                <Modals
+                  editable={edit}
+                  onhandleUpdate={handleUpdate}
+                  name={"edit"}
+                  data={val}
+                />
               </Button>
             ),
             delete: (
-              <Button onClick={()=>handleDelete(value.id)} variant="contained" color="secondary">
+              <Button
+                onClick={() => handleDelete(val.id)}
+                variant="contained"
+                color="secondary"
+              >
                 Delete
               </Button>
             ),
@@ -64,10 +76,9 @@ function ShowBranches() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-  }, []);
+  }, [props?.value]);
 
   const handleDelete = (id) => {
-   
     deleteBranchesService(id)
       .then((response) => {
         setUsers((prevstate) => {
@@ -80,14 +91,12 @@ function ShowBranches() {
         console.log("Something went wrong. Please try again later.");
       });
   };
-  const handleUpdate = (id,val) => {
-    
+  const handleUpdate = (id, val) => {
     updateBranchesService(id, val)
       .then((response) => {
-       
         setUsers((prevstate) => {
           return prevstate.map((user) => {
-            return user.id === response.id ? {...user,...response} : user;
+            return user.id === response.id ? { ...user, ...response } : user;
           });
         });
       })

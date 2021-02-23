@@ -1,6 +1,10 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { deleteBankService, getAllBank, updateBankService } from "../services/bank";
+import {
+  deleteBankService,
+  getAllBank,
+  updateBankService,
+} from "../services/bank";
 import {
   deleteStateService,
   getAllStates,
@@ -33,12 +37,10 @@ function ShowBank() {
   useEffect(() => {
     getAllBank()
       .then((response) => {
-        console.log("Bankdata", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
-  
               <Button
                 variant="contained"
                 onClick={() => {
@@ -62,7 +64,6 @@ function ShowBank() {
             ),
           };
         });
-        console.log("body", body);
         setCities(body);
       })
       .catch((error) => {
@@ -89,7 +90,7 @@ function ShowBank() {
       .then((response) => {
         setCities((prevstate) => {
           return prevstate.map((city) => {
-            return city.id === response.id ? {...city,...response} : city;
+            return city.id === response.id ? { ...city, ...response } : city;
           });
         });
 

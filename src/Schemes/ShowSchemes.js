@@ -1,7 +1,10 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { deleteSchemesService, getAllSchemes, updateSchemesService } from "../services/schemes";
-
+import {
+  deleteSchemesService,
+  getAllSchemes,
+  updateSchemesService,
+} from "../services/schemes";
 
 import MaterialTable from "../Table/Table";
 
@@ -30,12 +33,10 @@ function ShowSchemes() {
   useEffect(() => {
     getAllSchemes()
       .then((response) => {
-        console.log("response.data", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
-  
               <Button
                 variant="contained"
                 onClick={() => {
@@ -59,7 +60,7 @@ function ShowSchemes() {
             ),
           };
         });
-        console.log("body", body);
+
         setCities(body);
       })
       .catch((error) => {
@@ -86,7 +87,7 @@ function ShowSchemes() {
       .then((response) => {
         setCities((prevstate) => {
           return prevstate.map((city) => {
-            return city.id === response.id ? {...city,...response} : city;
+            return city.id === response.id ? { ...city, ...response } : city;
           });
         });
 

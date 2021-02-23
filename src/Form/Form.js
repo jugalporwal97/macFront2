@@ -43,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Form(props) {
-
-
-  console.log("formdata",props.FormGenerater)
   const [accessType, setaccessType] = React.useState(null);
 
   const classes = useStyles();
@@ -87,7 +84,7 @@ function Form(props) {
                 id: "outlined-age-native-simple",
               }}
             >
-                 <option value=""></option>
+              <option value=""></option>
               {form.value.map((load) => {
                 return <option value={load.val}>{load.payload}</option>;
               })}

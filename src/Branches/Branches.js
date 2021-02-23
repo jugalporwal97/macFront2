@@ -1,13 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "../Form/Form";
 import { getAllBank } from "../services/bank";
 import { createBranchesService } from "../services/branches";
 import ShowBranches from "./ShowBranches";
 
-
 function Branches() {
-
-
   //     const createUser = (e) => {
   //         e.preventDefault()
   //         setError(null);
@@ -39,57 +36,52 @@ function Branches() {
 
   //       }
 
+  const [val, setVal] = useState([]);
   const [FormGenerater, setFormGenerator] = useState({});
   useEffect(() => {
     getAllBank()
       .then((response) => {
+        const body = Object.values(response.data).map((k, v) => {
+          return k.id;
+        });
+        const body2 = Object.values(response.data).map((k, v) => {
+          return k.name;
+        });
 
-        const body =  Object.values(response.data).map((k,v)=>{return((k.id))})
-        const body2 =  Object.values(response.data).map((k,v)=>{return((k.name))})
+        const value = [];
+        for (let index = 0; index < body.length; index++) {
+          value.push({ val: body[index], payload: body2[index] });
+        }
+        setVal(value);
 
- console.log("branchesbody",{body,body2})
- const value=[]
-for (let index = 0; index < body.length; index++) {
-  value.push({val:body[index],payload:body2[index]})
-  
-}
+        setFormGenerator({
+          Branch: {
+            id: "Branch",
+            backendLabel: "name",
+            label: "Branch Name",
+            name: "Branch",
+            type: "Branch",
+            inputType: "text",
+            formValue: "",
+          },
 
-setFormGenerator({
-  Branch: {
-    id: "Branch",
-    backendLabel: "name",
-    label: "Branch Name",
-    name: "Branch",
-    type: "Branch",
-    inputType: "text",
-    formValue: "",
-  },
-  
+          accessType: {
+            name: "accessType",
+            backendLabel: "bankId",
 
-  accessType: {
-    name: "accessType",
-    backendLabel: "bankId",
+            label: "Bank Name",
+            value: value,
 
-    label: "Bank Name",
-    value: value,
-
-    id: "accessType",
-    formValue: "",
-    inputType: "select",
-  },
-})
-
-
-      }
-       
-        ).catch((error) => {
-        console.log("Something went wrong. Please try again later.");
+            id: "accessType",
+            formValue: "",
+            inputType: "select",
+          },
+        });
       })
-  },[]);
-
-  
-
-  
+      .catch((error) => {
+        console.log("Something went wrong. Please try again later.");
+      });
+  }, []);
 
   // const [formData, setFormData] = useState({
   //   name: {
@@ -101,7 +93,7 @@ setFormGenerator({
     e.preventDefault();
 
     const value = e.target.value;
-    console.log("valueselected",value)
+    console.log("valueselected", value);
     setFormGenerator((prev) => {
       return {
         ...prev,
@@ -115,12 +107,11 @@ setFormGenerator({
   const submitForm = (e) => {
     e.preventDefault();
 
-
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-  console.log("datatoserver",data)
+    console.log("datatoserver", data);
     createBranchesService(data)
       .then((response) => {
         console.log(">>session", response);
@@ -132,7 +123,6 @@ setFormGenerator({
 
   return (
     <div>
-   
       {/* <input
         type="text"
         name="name"
@@ -157,7 +147,7 @@ setFormGenerator({
         updateForm={updateForm}
         title={"Branches"}
       />
-      <ShowBranches/>
+      <ShowBranches value={val} />
     </div>
   );
 }

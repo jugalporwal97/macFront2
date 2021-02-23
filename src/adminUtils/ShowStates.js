@@ -32,12 +32,10 @@ function ShowStates() {
   useEffect(() => {
     getAllStates()
       .then((response) => {
-        console.log("response.data", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
-  
               <Button
                 variant="contained"
                 onClick={() => {
@@ -61,7 +59,7 @@ function ShowStates() {
             ),
           };
         });
-        console.log("body", body);
+
         setCities(body);
       })
       .catch((error) => {
@@ -88,7 +86,7 @@ function ShowStates() {
       .then((response) => {
         setCities((prevstate) => {
           return prevstate.map((city) => {
-            return city.id === response.id ? {...city,...response} : city;
+            return city.id === response.id ? { ...city, ...response } : city;
           });
         });
 

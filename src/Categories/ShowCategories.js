@@ -1,8 +1,10 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { deletecategoriesService, getAllcategories, updatecategoriesService } from "../services/categories";
-
-
+import {
+  deletecategoriesService,
+  getAllcategories,
+  updatecategoriesService,
+} from "../services/categories";
 
 import MaterialTable from "../Table/Table";
 
@@ -31,12 +33,10 @@ function ShowCategories() {
   useEffect(() => {
     getAllcategories()
       .then((response) => {
-        console.log("Bankdata", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
-  
               <Button
                 variant="contained"
                 onClick={() => {
@@ -60,7 +60,6 @@ function ShowCategories() {
             ),
           };
         });
-        console.log("body", body);
         setCities(body);
       })
       .catch((error) => {
@@ -87,7 +86,7 @@ function ShowCategories() {
       .then((response) => {
         setCities((prevstate) => {
           return prevstate.map((city) => {
-            return city.id === response.id ? {...city,...response} : city;
+            return city.id === response.id ? { ...city, ...response } : city;
           });
         });
 
