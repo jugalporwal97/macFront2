@@ -11,7 +11,7 @@ import MaterialTable from "../Table/Table";
 
 function ShowBranches(props) {
   //   const [row, setrow] = useState(initialState);
-  const j = "ds";
+
   const [Users, setUsers] = useState([]);
 
   // const rows = Users?{...Users}
