@@ -19,8 +19,8 @@ const useStyles = makeStyles({
 });
 
 export default function MaterialTable(props) {
-
-
+  console.log(">>rows", props.rows);
+  console.log(">>collums", props.columns);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -35,7 +35,7 @@ export default function MaterialTable(props) {
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper className="container">
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

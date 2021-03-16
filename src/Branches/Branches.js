@@ -60,7 +60,7 @@ function Branches() {
             backendLabel: "name",
             label: "Branch Name",
             name: "Branch",
-            type: "Branch",
+            type: "text",
             inputType: "text",
             formValue: "",
           },

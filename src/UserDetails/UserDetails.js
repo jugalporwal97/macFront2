@@ -2,7 +2,11 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import Modals from "../Modals/Modals";
 
-import { deleteUserService, showUserService, updateuserService } from "../services/users";
+import {
+  deleteUserService,
+  showUserService,
+  updateuserService,
+} from "../services/users";
 import MaterialTable from "../Table/Table";
 
 function UserDetails() {
@@ -10,7 +14,7 @@ function UserDetails() {
   const [Users, setUsers] = useState([]);
 
   // const rows = Users?{...Users}
-  const [edit,setEdit] = useState(['fullName',"email"])
+  const [edit, setEdit] = useState(["fullName", "email"]);
 
   const [columns, setColumns] = useState([
     { id: "email", label: "Email", minWidth: 150 },
@@ -31,17 +35,26 @@ function UserDetails() {
   useEffect(() => {
     showUserService()
       .then((response) => {
-        console.log("responsedatauserDetails",response.data)
+        console.log("responsedatauserDetails", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
             edit: (
               <Button variant="contained" color="primary">
-                <Modals editable={edit}  onhandleUpdate={handleUpdate} name={"edit"} data={value} />
+                <Modals
+                  editable={edit}
+                  onhandleUpdate={handleUpdate}
+                  name={"edit"}
+                  data={value}
+                />
               </Button>
             ),
             delete: (
-              <Button onClick={()=>handleDelete(value.id)} variant="contained" color="secondary">
+              <Button
+                onClick={() => handleDelete(value.id)}
+                variant="contained"
+                color="secondary"
+              >
                 Delete
               </Button>
             ),
@@ -66,7 +79,6 @@ function UserDetails() {
   }, []);
 
   const handleDelete = (id) => {
-   
     deleteUserService(id)
       .then((response) => {
         setUsers((prevstate) => {
@@ -79,14 +91,12 @@ function UserDetails() {
         console.log("Something went wrong. Please try again later.");
       });
   };
-  const handleUpdate = (id,val) => {
-    
+  const handleUpdate = (id, val) => {
     updateuserService(id, val)
       .then((response) => {
-       
         setUsers((prevstate) => {
           return prevstate.map((user) => {
-            return user.id === response.id ? {...user,...response} : user;
+            return user.id === response.id ? { ...user, ...response } : user;
           });
         });
       })
@@ -96,7 +106,14 @@ function UserDetails() {
   };
 
   return (
-    <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
+    <div
+      style={{
+        width: "80%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginTop: "100px",
+      }}
+    >
       <MaterialTable rows={Users} columns={columns} />
     </div>
   );

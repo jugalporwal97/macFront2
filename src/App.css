@@ -8,18 +8,20 @@
 }
 
 .TextField {
+  position: relative;
   display: flex;
   flex-direction: row;
-  margin: 2%;
-
-  justify-content:flex-end;
+  /* margin: 10%; */
+  /* justify-content: flex-end; */
   align-items: baseline;
- 
+  margin-top: 82px;
+  margin-left: 20px;
 }
 
 .MaterialTable {
   display: flex;
   height: auto;
   justify-content:center;
+  margin-left: auto;
 
 }

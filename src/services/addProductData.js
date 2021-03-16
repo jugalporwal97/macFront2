@@ -5,19 +5,19 @@ import {
   postRequest,
 } from "./request";
 
-const ENDPOINT = "products";
-export const createproductsService = (params) => {
+const ENDPOINT = "product-data";
+export const createProductDataService = (params) => {
   return postRequest(ENDPOINT, params);
 };
 
-export const getAllproducts = () => {
+export const getAllProductData = () => {
   return getRequest(ENDPOINT);
 };
-export const deleteproductsService = (id) => {
+export const deleteProductDataService = (id) => {
   return deleteRequest(`${ENDPOINT}/${id}`);
 };
 
-export const updateproductsService = (id, value) => {
+export const updateProductDataService = (id, value) => {
   const body = { name: value };
   return patchRequest(`${ENDPOINT}/${id}`, body);
 };

@@ -43,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Form(props) {
-  const [accessType, setaccessType] = React.useState(null);
-
   const classes = useStyles();
 
   const forms = props.FormGenerater
@@ -57,10 +55,46 @@ function Form(props) {
             required
             fullWidth
             id={form.id}
-            value={form.formValue}
+            // value={form.formValue}
             label={form.label}
             name={form.name}
             type={form.type}
+            onChange={(e) => props.updateForm(e, form.id)}
+            // autoFocus
+          />
+        ) : form.inputType === "date" ? (
+          <TextField
+            key={form.id}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id={form.id}
+            label={form.label}
+            name={form.name}
+            type={form.type}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => props.updateForm(e, form.id)}
+            // autoFocus
+          />
+        ) : form.inputType === "number" ? (
+          <TextField
+            key={form.id}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id={form.id}
+            label={form.label}
+            name={form.name}
+            type={form.type}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => props.updateForm(e, form.id)}
             // autoFocus
           />
@@ -76,7 +110,6 @@ function Form(props) {
               margin="normal"
               required
               fullWidth
-              value={accessType}
               onChange={(e) => props.updateForm(e, form.id)}
               label="Age"
               inputProps={{
@@ -86,7 +119,11 @@ function Form(props) {
             >
               <option value=""></option>
               {form.value.map((load) => {
-                return <option value={load.val}>{load.payload}</option>;
+                return (
+                  <option value={load.val || load}>
+                    {load.payload || load}
+                  </option>
+                );
               })}
             </Select>
           </FormControl>

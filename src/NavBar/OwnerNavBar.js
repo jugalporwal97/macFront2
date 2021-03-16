@@ -6,7 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 import { removeUserSession } from "../Utils/Common";
-import { Link,withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import "./OwnerNavbar.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -23,7 +24,7 @@ const OwnerNavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className="Navbar">
       <AppBar position="static">
         <Toolbar style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
@@ -70,12 +71,12 @@ const OwnerNavBar = (props) => {
             <Button color="inherit">Access Manager</Button>
           </Link>
 
-          <Link
+          {/* <Link
             to="/userLogs"
             style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button color="inherit">Logs</Button>
-          </Link>
+          > */
+          /* <Button color="inherit">Logs</Button>
+          </Link> */}
           <Button
             color="inherit"
             onClick={() => {
