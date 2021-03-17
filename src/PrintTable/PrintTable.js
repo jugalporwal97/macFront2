@@ -4,7 +4,7 @@ export default function PrintTable(props) {
   const item = (
     props.user &&
     Object.values(props.user).map((val) => {
-      return {val.allocatedInspector};
+      return val.allocatedInspector;
     })
   ).map((value) => {
     return { value };

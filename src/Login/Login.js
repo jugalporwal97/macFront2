@@ -49,6 +49,7 @@ function Login(props) {
       .then((response) => {
         setLoading(false);
         console.log(">>session", response.accessToken);
+        console.log(">>response.user", response.user);
 
         setUserSession(response.accessToken, response.user);
         props.history.push("/Home");
