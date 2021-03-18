@@ -21,6 +21,7 @@ import UserLogs from "./UserLogs/UserLogs";
 import AccessManager from "./AccessManager/AccessManager";
 import Modals from "./Modals/Modals";
 import Moment from "react-moment";
+import Edit from "./Edit/Edit";
 import "moment-timezone";
 import {
   deleteBranchesService,
@@ -93,6 +94,16 @@ function App() {
               </div>
             )}
           />
+
+          <Route
+            exact
+            path="/edit"
+            render={() => (
+              <div>
+                <Edit />
+              </div>
+            )}
+          />
           <Route
             exact
             path="/accessManager"
@@ -111,7 +122,7 @@ function App() {
             render={() => (
               <React.Fragment>
                 <OwnerNavBar />
-                <div className="tab">
+                <div className="">
                   <HomeCom />
                 </div>
               </React.Fragment>

@@ -56,7 +56,7 @@ function Form(props) {
             fullWidth
             id={form.id}
             // value={form.formValue}
-            label={form.label}
+            label={`${form.label} = ${form.formdata}`}
             name={form.name}
             type={form.type}
             onChange={(e) => props.updateForm(e, form.id)}

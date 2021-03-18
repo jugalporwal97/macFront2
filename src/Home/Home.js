@@ -14,8 +14,10 @@ import {
   updateProductDataService,
 } from "../services/addProductData";
 import "./Home.css";
+import { withRouter } from "react-router";
+import Edit from "../Edit/Edit";
 
-export default function HomeCom() {
+function HomeCom(props) {
   const [Search, SetSearch] = useState("");
   const [Users, setUsers] = useState([]);
   const [temp, settemp] = useState({});
@@ -291,13 +293,21 @@ export default function HomeCom() {
                 : null,
 
             edit: (
-              <Button variant="contained" color="primary">
-                <Modals
+              <Button
+                value={"edit"}
+                variant="contained"
+                onClick={() => buttonClick(val)}
+                color="primary"
+              >
+                {" "}
+                edit
+                {/* <Edit data={val.id} /> */}
+                {/* <Modals
                   editable={edit}
                   onhandleUpdate={handleUpdate}
                   name={"edit"}
                   data={val}
-                />
+                /> */}
               </Button>
             ),
             delete: (
@@ -356,6 +366,15 @@ export default function HomeCom() {
         console.log("Something went wrong. Please try again later.");
       });
   }, []);
+  const buttonClick = (e) => {
+    console.log(`>>id,val`, e);
+    // props.history.push("/addProductData");
+    props.history.push({
+      pathname: "/edit",
+      search: "",
+      state: { detail: e },
+    });
+  };
 
   const handleDelete = (id) => {
     deleteProductDataService(id)
@@ -423,3 +442,4 @@ export default function HomeCom() {
     </div>
   );
 }
+export default withRouter(HomeCom);
