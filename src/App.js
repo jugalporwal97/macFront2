@@ -36,6 +36,9 @@ import {
 import Bank from "./Banks/Bank";
 import { getUser } from "./Utils/Common";
 import HomeCom from "./Home/Home";
+import AdminNavBar from "./NavBar/AdminNavBar";
+import AdminHome from "./Home/AdminHome";
+import UserHome from "./Home/UserHome";
 
 function App() {
   return (
@@ -59,9 +62,30 @@ function App() {
             exact
             path="/AdminPannel"
             render={() => (
-              <div>
-                <OwnerNavBar /> <AdminPannel />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <AdminPannel />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AdminHome />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
 
@@ -69,9 +93,30 @@ function App() {
             exact
             path="/createProduct"
             render={() => (
-              <div>
-                <OwnerNavBar /> <CreateProduct />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <CreateProduct />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AdminHome />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
 
@@ -79,9 +124,30 @@ function App() {
             exact
             path="/userDetails"
             render={() => (
-              <div>
-                <OwnerNavBar /> <UserDetails />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <UserDetails />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AdminHome />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
 
@@ -89,9 +155,30 @@ function App() {
             exact
             path="/addProductData"
             render={() => (
-              <div>
-                <OwnerNavBar /> <AddProductData />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <AddProductData />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AddProductData />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
 
@@ -99,18 +186,60 @@ function App() {
             exact
             path="/edit"
             render={() => (
-              <div>
-                <Edit />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <Edit />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <Edit />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
           <Route
             exact
             path="/accessManager"
             render={() => (
-              <div>
-                <OwnerNavBar /> <AccessManager />
-              </div>
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <AccessManager />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AdminHome />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             )}
           />
 
@@ -121,10 +250,28 @@ function App() {
             path="/Home"
             render={() => (
               <React.Fragment>
-                <OwnerNavBar />
-                <div className="">
-                  <HomeCom />
-                </div>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <HomeCom />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <AdminHome />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
               </React.Fragment>
             )}
           />

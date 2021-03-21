@@ -17,7 +17,7 @@ import "./Home.css";
 import { withRouter } from "react-router";
 import Edit from "../Edit/Edit";
 
-function HomeCom(props) {
+function UserHome(props) {
   const [Search, SetSearch] = useState("");
   const [Users, setUsers] = useState([]);
   const [temp, settemp] = useState({});
@@ -225,11 +225,6 @@ function HomeCom(props) {
       label: "Edit",
       minWidth: 100,
     },
-    {
-      id: "delete",
-      label: "Delete",
-      minWidth: 100,
-    },
   ]);
 
   useEffect(() => {
@@ -310,15 +305,6 @@ function HomeCom(props) {
                 /> */}
               </Button>
             ),
-            delete: (
-              <Button
-                onClick={() => handleDelete(val.id)}
-                variant="contained"
-                color="secondary"
-              >
-                Delete
-              </Button>
-            ),
           };
         });
 
@@ -376,20 +362,6 @@ function HomeCom(props) {
     });
   };
 
-  const handleDelete = (id) => {
-    deleteProductDataService(id)
-      .then((response) => {
-        setUsers((prevstate) => {
-          return prevstate.filter((user) => {
-            return user.id !== response.id;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
-
   const searchSpace = (event) => {
     console.log(event.target.value);
     let keyword = event.target.value;
@@ -442,4 +414,4 @@ function HomeCom(props) {
     </div>
   );
 }
-export default withRouter(HomeCom);
+export default withRouter(UserHome);

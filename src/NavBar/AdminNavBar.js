@@ -4,7 +4,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { removeUserSession } from "../Utils/Common";
+import { Link, withRouter } from "react-router-dom";
 
+import "./AdminNavBar.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -17,20 +20,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OwnerNavBar() {
+const AdminNavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className="Navbar">
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Hi, NAME
-          </Typography>
+          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+            <Typography variant="h6" className={classes.title}>
+              Hi, NAME
+            </Typography>
+          </Link>
+          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit">Show Products</Button>
+          </Link>
+          <Link
+            to="/addProductData"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button color="inherit">Add Product DATA</Button>
+          </Link>
 
-          <Button color="inherit">Logout</Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              removeUserSession();
+              console.log("logout");
+              props.history.push("/login");
+            }}
+          >
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+export default withRouter(AdminNavBar);

@@ -3,8 +3,6 @@ import Form from "../Form/Form";
 
 import { createUserService } from "../services/users";
 function CreateUser() {
-
-
   //     const createUser = (e) => {
   //         e.preventDefault()
   //         setError(null);
@@ -106,17 +104,19 @@ function CreateUser() {
   const submitForm = (e) => {
     e.preventDefault();
 
-
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-  
+
     createUserService(data)
       .then((response) => {
+        alert("Form Successfully Submited.");
         console.log(">>session", response);
       })
       .catch((error) => {
+        alert("Enter Correct Values Some Error.");
+
         console.log("Something went wrong. Please try again later.");
       });
   };

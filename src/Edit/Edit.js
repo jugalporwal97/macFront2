@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import "./Edit.css";
 
 import Form from "../Form/Form";
 import { createProductDataService } from "../services/addProductData";
@@ -15,6 +16,7 @@ import { getAllSchemes } from "../services/schemes";
 import { getAllStates } from "../services/state";
 import { getAllStatus } from "../services/status";
 import { getAllunitTypes } from "../services/unitTypes";
+import OwnerNavBar, { OwnerNavbar } from "../NavBar/OwnerNavBar";
 
 export default function Edit(props) {
   const location = useLocation();
@@ -706,7 +708,7 @@ export default function Edit(props) {
   };
 
   return (
-    <div>
+    <div className="edit">
       <Form
         FormGenerater={Object.values(FormGenerater)}
         submitForm={submitForm}

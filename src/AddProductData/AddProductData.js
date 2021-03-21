@@ -687,9 +687,11 @@ function AddProductData() {
     console.log("datatoserver", data);
     createProductDataService(data)
       .then((response) => {
+        alert("Form Successfully Submited.");
         console.log(">>session", response);
       })
       .catch((error) => {
+        alert("Enter Correct Values Some Error.");
         console.log("Something went wrong. Please try again later.");
       });
   };
