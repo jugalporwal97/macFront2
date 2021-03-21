@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,31 +56,35 @@ function Form(props) {
             required
             fullWidth
             id={form.id}
-            // value={form.formValue}
-            label={`${form.label} = ${form.formdata}`}
+            value={form.formValue}
+            label={`${form.label}`}
             name={form.name}
             type={form.type}
             onChange={(e) => props.updateForm(e, form.id)}
             // autoFocus
           />
         ) : form.inputType === "date" ? (
-          <TextField
-            key={form.id}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id={form.id}
-            label={form.label}
-            name={form.name}
-            type={form.type}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => props.updateForm(e, form.id)}
-            // autoFocus
-          />
+          <React.Fragment>
+            {console.log("<<Date", form.formValue)}
+            <TextField
+              key={form.id}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id={form.id}
+              label={form.label}
+              value={moment(new Date(form.formValue)).format("YYYY-MM-DD")}
+              name={form.name}
+              type={form.type}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) => props.updateForm(e, form.id)}
+              // autoFocus
+            />
+          </React.Fragment>
         ) : form.inputType === "number" ? (
           <TextField
             key={form.id}
@@ -89,6 +94,7 @@ function Form(props) {
             fullWidth
             id={form.id}
             label={form.label}
+            value={form.formValue}
             name={form.name}
             type={form.type}
             className={classes.textField}
@@ -112,6 +118,8 @@ function Form(props) {
               fullWidth
               onChange={(e) => props.updateForm(e, form.id)}
               label="Age"
+              value={form.formValue}
+              defaultValue={form.formValue}
               inputProps={{
                 name: "age",
                 id: "outlined-age-native-simple",

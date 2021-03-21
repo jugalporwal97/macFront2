@@ -11,6 +11,7 @@ import { getUser } from "../Utils/Common";
 import {
   deleteProductDataService,
   getAllProductData,
+  getPagenatedDataServise,
   updateProductDataService,
 } from "../services/addProductData";
 import "./Home.css";
@@ -21,7 +22,7 @@ function HomeCom(props) {
   const [Search, SetSearch] = useState("");
   const [Users, setUsers] = useState([]);
   const [temp, settemp] = useState({});
-
+  const [total, settotal] = useState(0);
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["bankId", "allocatedToInspectorId"]);
 
@@ -232,10 +233,10 @@ function HomeCom(props) {
     },
   ]);
 
-  useEffect(() => {
-    console.log(">>user", getUser());
-    getAllProductData()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((val) => {
           return {
             ...val,
@@ -303,11 +304,11 @@ function HomeCom(props) {
                 edit
                 {/* <Edit data={val.id} /> */}
                 {/* <Modals
-                  editable={edit}
-                  onhandleUpdate={handleUpdate}
-                  name={"edit"}
-                  data={val}
-                /> */}
+                editable={edit}
+                onhandleUpdate={handleUpdate}
+                name={"edit"}
+                data={val}
+              /> */}
               </Button>
             ),
             delete: (
@@ -360,11 +361,18 @@ function HomeCom(props) {
 
         // console.log(">>temp", temp);
 
-        setUsers(allu);
+        setUsers((preValues) => {
+          console.log(`<<preValue,allu`, { preValues, allu });
+          return allu;
+        });
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    console.log(">>user", getUser());
+    getPagenatedData(0);
   }, []);
   const buttonClick = (e) => {
     console.log(`>>id,val`, e);
@@ -409,6 +417,8 @@ function HomeCom(props) {
         console.log("Something went wrong. Please try again later.");
       });
   };
+
+  console.log(`<<<<Users`, Users);
   const row = Users.filter((row) => {
     if (Search) {
       return row.productId
@@ -418,7 +428,7 @@ function HomeCom(props) {
     }
     return true;
   });
-  console.log(">>getuser", getUser());
+  console.log("<<<row", row);
   return (
     <div className="table">
       <div className="TextField">
@@ -431,6 +441,8 @@ function HomeCom(props) {
       </div>
       <div className="table">
         <MaterialTable
+          total={total}
+          getPagenatedData={getPagenatedData}
           rows={row ? row : window.location.reload()}
           columns={columns}
         />

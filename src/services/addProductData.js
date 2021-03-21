@@ -4,10 +4,17 @@ import {
   patchRequest,
   postRequest,
 } from "./request";
+export const pagesize = 10;
 
 const ENDPOINT = "product-data";
 export const createProductDataService = (params) => {
   return postRequest(ENDPOINT, params);
+};
+
+export const getPagenatedDataServise = (pagenumber = 0) => {
+  return getRequest(
+    `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
+  );
 };
 
 export const getAllProductData = () => {
@@ -18,6 +25,5 @@ export const deleteProductDataService = (id) => {
 };
 
 export const updateProductDataService = (id, value) => {
-  const body = { name: value };
-  return patchRequest(`${ENDPOINT}/${id}`, body);
+  return patchRequest(`${ENDPOINT}/${id}`, value);
 };

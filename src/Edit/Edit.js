@@ -3,7 +3,10 @@ import { useLocation } from "react-router";
 import "./Edit.css";
 
 import Form from "../Form/Form";
-import { createProductDataService } from "../services/addProductData";
+import {
+  createProductDataService,
+  updateProductDataService,
+} from "../services/addProductData";
 import { getAllBank } from "../services/bank";
 import { getAllBranches } from "../services/branches";
 import { getAllcategories } from "../services/categories";
@@ -20,10 +23,8 @@ import OwnerNavBar, { OwnerNavbar } from "../NavBar/OwnerNavBar";
 
 export default function Edit(props) {
   const location = useLocation();
-  const [formdata, setformdata] = useState({});
-  useEffect(() => {
-    setformdata(location.state.detail); // result: 'some_value'
-  }, [location]);
+
+  const formdata = location.state.detail;
 
   console.log(`formdata`, formdata);
   const [pid, setpid] = useState([]);
@@ -270,10 +271,235 @@ export default function Edit(props) {
         console.log("Something went wrong. Please try again later.");
       });
   }, []);
+  useEffect(() => {
+    console.log(`inwardDate`, formdata.inwardDate);
+    //     {id: 10, productId: 6, inwardDate: "2021-03-01T00:00:00.000Z", pan: "wqwq2", unitTypeId: 3, …}
+    // acknowledgementNumber: "1234"
+    // address: "wqwq"
+    // allocatedInspector: {name: "jugal"}
+    // allocatedToInspectorId: 3
+    // bank: {name: "sasa"}
+    // bankId: 4
+    // benefits: "111"
+    // branch: {name: "icicii"}
+    // branchId: 12
+    // capital: "2345"
+    // category: {name: "dwdw"}
+    // categoryId: 2
+    // city: {name: "lokesh"}
+    // cityId: 36
+    // claimUpTo: "432"
+    // contactPerson: {name: "jugal", contact: "02942410558"}
+    // contactPersonId: 3
+    // createdAt: "2021-03-16T13:05:31.260Z"
+    // customerLoginId: "2121"
+    // customerLoginPassword: "wqwq"
+    // fileNumber: "123"
+    // id: 10
+    // interest: "5432"
+    // inwardDate: "2021-03-01T00:00:00.000Z"
+    // inwardSlip: true
+    // jitVisitDate: "2021-03-12T00:00:00.000Z"
+    // lastClaimQuarter: "1234"
+    // lastDateForJit: "2021-03-06T00:00:00.000Z"
+    // lastDateForJitExtension: "2021-03-19T00:00:00.000Z"
+    // lastDateOfApplication: "2021-03-05T00:00:00.000Z"
+    // loanAmount: "12121"
+    // marketingPerson: {name: "Jugal Porwal"}
+    // marketingPersonId: 1
+    // onlineReferenceNumber: "111"
+    // pan: "wqwq2"
+    // processDoneBy: {name: "dwdw"}
+    // processDoneById: 2
+    // product: {name: "allu bada"}
+    // productId: 6
+    // referenceDate: "2021-03-05T00:00:00.000Z"
+    // remark: "gfds"
+    // sanctionDate: "2021-03-19T00:00:00.000Z"
+    // scheme: {name: "dsds"}
+    // schemeId: 2
+    // stateDate: "2021-03-06T00:00:00.000Z"
+    // status: {name: "sasa"}
+    // statusId: 1
+    // subsidy: "21"
+    // uid: "123456"
+    // unitType: {name: "ff"}
+    // unitTypeId: 3
+    // updatedAt: "2021-03-16T13:05:31.260Z"
+    setFormGenerator((prevValues) => {
+      console.log(`<<<<formdata`, formdata);
+      const x = {
+        ...prevValues,
+
+        productId: {
+          ...prevValues["productId"],
+          formValue: formdata.productId,
+        },
+        pan: {
+          ...prevValues["pan"],
+          formValue: formdata.pan,
+        },
+        inwardDate: {
+          ...prevValues["inwardDate"],
+          formValue: formdata.inwardDate,
+        },
+        unitTypeId: {
+          ...prevValues["unitTypeId"],
+          formValue: formdata.unitTypeId,
+        },
+        address: {
+          ...prevValues["address"],
+          formValue: formdata.address,
+        },
+        benefits: {
+          ...prevValues["benefits"],
+          formValue: formdata.benefits,
+        },
+        onlineReferenceNumber: {
+          ...prevValues["onlineReferenceNumber"],
+          formValue: formdata.onlineReferenceNumber,
+        },
+
+        allocatedToInspectorId: {
+          ...prevValues["allocatedToInspectorId"],
+          formValue: formdata.allocatedToInspectorId,
+        },
+
+        contactPersonId: {
+          ...prevValues["contactPersonId"],
+          formValue: formdata.contactPersonId,
+        },
+        customerLoginId: {
+          ...prevValues["customerLoginId"],
+          formValue: formdata.customerLoginId,
+        },
+        customerLoginPassword: {
+          ...prevValues["customerLoginPassword"],
+          formValue: formdata.customerLoginPassword,
+        },
+        bankId: {
+          ...prevValues["bankId"],
+          formValue: formdata.bankId,
+        },
+        branchId: {
+          ...prevValues["branchId"],
+          formValue: formdata.branchId,
+        },
+        cityId: {
+          ...prevValues["cityId"],
+          formValue: formdata.cityId,
+        },
+        loanAmount: {
+          ...prevValues["loanAmount"],
+          formValue: formdata.loanAmount,
+        },
+
+        subsidy: {
+          ...prevValues["subsidy"],
+          formValue: formdata.subsidy,
+        },
+        sanctionDate: {
+          ...prevValues["sanctionDate"],
+          formValue: formdata.sanctionDate,
+        },
+
+        lastDateForJit: {
+          ...prevValues["lastDateForJit"],
+          formValue: formdata.lastDateForJit,
+        },
+
+        lastDateOfApplication: {
+          ...prevValues["lastDateOfApplication"],
+          formValue: formdata.lastDateOfApplication,
+        },
+
+        lastDateForJitExtension: {
+          ...prevValues["lastDateForJitExtension"],
+          formValue: formdata.lastDateForJitExtension,
+        },
+
+        jitVisitDate: {
+          ...prevValues["jitVisitDate"],
+          formValue: formdata.jitVisitDate,
+        },
+        marketingPersonId: {
+          ...prevValues["marketingPersonId"],
+          formValue: formdata.marketingPersonId,
+        },
+
+        statusId: {
+          ...prevValues["statusId"],
+          formValue: formdata.statusId,
+        },
+
+        stateDate: {
+          ...prevValues["stateDate"],
+          formValue: formdata.stateDate,
+        },
+
+        uid: {
+          ...prevValues["uid"],
+          formValue: formdata.uid,
+        },
+        remark: {
+          ...prevValues["remark"],
+          formValue: formdata.remark,
+        },
+        inwardSlip: {
+          ...prevValues["inwardSlip"],
+          formValue: formdata.inwardSlip,
+        },
+        referenceDate: {
+          ...prevValues["referenceDate"],
+          formValue: formdata.referenceDate,
+        },
+        categoryId: {
+          ...prevValues["categoryId"],
+          formValue: formdata.categoryId,
+        },
+        schemeId: {
+          ...prevValues["schemeId"],
+          formValue: formdata.schemeId,
+        },
+        interest: {
+          ...prevValues["interest"],
+          formValue: formdata.interest,
+        },
+        capital: {
+          ...prevValues["capital"],
+          formValue: formdata.capital,
+        },
+        claimUpTo: {
+          ...prevValues["claimUpTo"],
+          formValue: formdata.claimUpTo,
+        },
+        processDoneById: {
+          ...prevValues["processDoneById"],
+          formValue: formdata.processDoneById,
+        },
+        fileNumber: {
+          ...prevValues["fileNumber"],
+          formValue: formdata.fileNumber,
+        },
+        acknowledgementNumber: {
+          ...prevValues["acknowledgementNumber"],
+          formValue: formdata.acknowledgementNumber,
+        },
+        lastClaimQuarter: {
+          ...prevValues["lastClaimQuarter"],
+          formValue: formdata.lastClaimQuarter,
+        },
+      };
+      console.log("<<<<XXXX", x);
+
+      return x;
+    });
+  }, []);
 
   useEffect(() => {
-    setFormGenerator({
+    setFormGenerator((prevValues) => ({
       productId: {
+        ...prevValues["productId"],
         name: "productId",
         backendLabel: "productId",
 
@@ -281,29 +507,30 @@ export default function Edit(props) {
         value: pid,
 
         id: "productId",
-        formValue: "",
         inputType: "select",
       },
       inwardDate: {
+        ...prevValues["inwardDate"],
         name: "inwardDate",
         backendLabel: "inwardDate",
         label: "Inward Date",
         type: "date",
         id: "inwardDate",
-        formValue: "",
+
         inputType: "date",
       },
 
       pan: {
+        ...prevValues["pan"],
         id: "pan",
         backendLabel: "pan",
         label: "PAN",
         name: "PAN",
         type: "text",
-        inputType: "number",
-        formValue: "allu",
+        inputType: "text",
       },
       unitTypeId: {
+        ...prevValues["unitTypeId"],
         name: "unitTypeId",
         backendLabel: "unitTypeId",
 
@@ -311,10 +538,11 @@ export default function Edit(props) {
         value: uid,
 
         id: "unitTypeId",
-        formValue: "",
+
         inputType: "select",
       },
       address: {
+        ...prevValues["address"],
         formdata: "jugal",
         id: "address",
         backendLabel: "address",
@@ -322,27 +550,27 @@ export default function Edit(props) {
         name: "Address",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       benefits: {
+        ...prevValues["benefits"],
         id: "benefits",
         backendLabel: "benefits",
         label: "Benefits",
         name: "Benefits",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       onlineReferenceNumber: {
+        ...prevValues["onlineReferenceNumber"],
         id: "onlineReferenceNumber",
         backendLabel: "onlineReferenceNumber",
         label: "Online Reference Number",
         name: "onlineReferenceNumber",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       allocatedToInspectorId: {
+        ...prevValues["allocatedToInspectorId"],
         name: "allocatedToInspectorId",
         backendLabel: "allocatedToInspectorId",
 
@@ -350,10 +578,11 @@ export default function Edit(props) {
         value: InspectorId,
 
         id: "allocatedToInspectorId",
-        formValue: "",
+
         inputType: "select",
       },
       contactPersonId: {
+        ...prevValues["contactPersonId"],
         name: "contactPersonId",
         backendLabel: "contactPersonId",
 
@@ -361,28 +590,29 @@ export default function Edit(props) {
         value: contactid,
 
         id: "contactPersonId",
-        formValue: "",
+
         inputType: "select",
       },
       customerLoginId: {
+        ...prevValues["customerLoginId"],
         id: "customerLoginId",
         backendLabel: "customerLoginId",
         label: "Customer Login Id",
         name: "customerLoginId",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       customerLoginPassword: {
+        ...prevValues["customerLoginPassword"],
         id: "customerLoginPassword",
         backendLabel: "customerLoginPassword",
         label: "Customer LoginPassword",
         name: "customerLoginPassword",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       bankId: {
+        ...prevValues["bankId"],
         name: "bankId",
         backendLabel: "bankId",
 
@@ -390,10 +620,11 @@ export default function Edit(props) {
         value: bid,
 
         id: "bankId",
-        formValue: "",
+
         inputType: "select",
       },
       branchId: {
+        ...prevValues["branchId"],
         name: "branchId",
         backendLabel: "branchId",
 
@@ -401,10 +632,11 @@ export default function Edit(props) {
         value: braid,
 
         id: "branchId",
-        formValue: "",
+
         inputType: "select",
       },
       cityId: {
+        ...prevValues["cityId"],
         name: "cityId",
         backendLabel: "cityId",
 
@@ -412,73 +644,79 @@ export default function Edit(props) {
         value: cid,
 
         id: "cityId",
-        formValue: "",
+
         inputType: "select",
       },
       loanAmount: {
+        ...prevValues["loanAmount"],
         id: "loanAmount",
         backendLabel: "loanAmount",
         label: "Loan Amount",
         name: "loanAmount",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       subsidy: {
+        ...prevValues["subsidy"],
         id: "subsidy",
         backendLabel: "subsidy",
         label: "Subsidy Amount",
         name: "subsidy",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       sanctionDate: {
+        ...prevValues["sanctionDate"],
         name: "sanctionDate",
         backendLabel: "sanctionDate",
         label: "Sanction Date",
         type: "date",
         id: "sanctionDate",
-        formValue: "",
+
         inputType: "date",
       },
       lastDateOfApplication: {
+        ...prevValues["lastDateOfApplication"],
         name: "lastDateOfApplication",
         backendLabel: "lastDateOfApplication",
         label: "Last Date Of Application",
         type: "date",
         id: "lastDateOfApplication",
-        formValue: "",
+
         inputType: "date",
       },
       lastDateForJit: {
+        ...prevValues["lastDateForJit"],
         name: "lastDateForJit",
         backendLabel: "lastDateForJit",
         label: "Last Date For Jit",
         type: "date",
         id: "lastDateForJit",
-        formValue: "",
+
         inputType: "date",
       },
       lastDateForJitExtension: {
+        ...prevValues["lastDateForJitExtension"],
         name: "lastDateForJitExtension",
         backendLabel: "lastDateForJitExtension",
         label: "Last Date For Jit Extension",
         type: "date",
         id: "lastDateForJitExtension",
-        formValue: "",
+
         inputType: "date",
       },
       jitVisitDate: {
+        ...prevValues["jitVisitDate"],
         name: "jitVisitDate",
         backendLabel: "jitVisitDate",
         label: "Jit Visit Date",
         type: "date",
         id: "jitVisitDate",
-        formValue: "",
+
         inputType: "date",
       },
       marketingPersonId: {
+        ...prevValues["marketingPersonId"],
         name: "marketingPersonId",
         backendLabel: "marketingPersonId",
 
@@ -486,10 +724,11 @@ export default function Edit(props) {
         value: mpid,
 
         id: "marketingPersonId",
-        formValue: "",
+
         inputType: "select",
       },
       statusId: {
+        ...prevValues["statusId"],
         name: "statusId",
         backendLabel: "statusId",
 
@@ -497,55 +736,58 @@ export default function Edit(props) {
         value: stid,
 
         id: "statusId",
-        formValue: "",
+
         inputType: "select",
       },
       stateDate: {
+        ...prevValues["stateDate"],
         name: "stateDate",
         backendLabel: "stateDate",
         label: "Status Date",
         type: "date",
         id: "stateDate",
-        formValue: "",
+
         inputType: "date",
       },
       uid: {
+        ...prevValues["uid"],
         id: "uid",
         backendLabel: "uid",
         label: "Aadhar Number",
         name: "uid",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       remark: {
+        ...prevValues["remark"],
         id: "remark",
         backendLabel: "remark",
         label: "Remark",
         name: "remark",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       inwardSlip: {
+        ...prevValues["inwardSlip"],
         id: "inwardSlip",
         backendLabel: "inwardSlip",
         label: "Inward Slip",
         name: "inwardSlip",
         value: ["true", "false"],
         inputType: "select",
-        formValue: "",
       },
       referenceDate: {
+        ...prevValues["referenceDate"],
         name: "referenceDate",
         backendLabel: "referenceDate",
         label: "Reference Date",
         type: "date",
         id: "referenceDate",
-        formValue: "",
+
         inputType: "date",
       },
       categoryId: {
+        ...prevValues["categoryId"],
         name: "categoryId",
         backendLabel: "categoryId",
 
@@ -553,10 +795,11 @@ export default function Edit(props) {
         value: Catid,
 
         id: "categoryId",
-        formValue: "",
+
         inputType: "select",
       },
       schemeId: {
+        ...prevValues["schemeId"],
         name: "schemeId",
         backendLabel: "schemeId",
 
@@ -564,37 +807,38 @@ export default function Edit(props) {
         value: Shid,
 
         id: "schemeId",
-        formValue: "",
+
         inputType: "select",
       },
       interest: {
+        ...prevValues["interest"],
         id: "interest",
         backendLabel: "interest",
         label: "Interest",
         name: "interest",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       capital: {
+        ...prevValues["capital"],
         id: "capital",
         backendLabel: "capital",
         label: "Capital",
         name: "capital",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       claimUpTo: {
+        ...prevValues["claimUpTo"],
         id: "claimUpTo",
         backendLabel: "claimUpTo",
         label: "ClaimUpTo",
         name: "claimUpTo",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       processDoneById: {
+        ...prevValues["processDoneById"],
         name: "processDoneById",
         backendLabel: "processDoneById",
 
@@ -602,38 +846,37 @@ export default function Edit(props) {
         value: proid,
 
         id: "processDoneById",
-        formValue: "",
+
         inputType: "select",
       },
       fileNumber: {
+        ...prevValues["fileNumber"],
         id: "fileNumber",
         backendLabel: "fileNumber",
         label: "File Number",
         name: "fileNumber",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
       acknowledgementNumber: {
+        ...prevValues["acknowledgementNumber"],
         id: "acknowledgementNumber",
         backendLabel: "acknowledgementNumber",
         label: "Acknowledgement Number",
         name: "acknowledgementNumber",
         type: "text",
         inputType: "text",
-
-        formValue: "",
       },
       lastClaimQuarter: {
+        ...prevValues["lastClaimQuarter"],
         id: "lastClaimQuarter",
         backendLabel: "lastClaimQuarter",
         label: "Last Claim Quarter",
         name: "lastClaimQuarter",
         type: "text",
         inputType: "text",
-        formValue: "",
       },
-    });
+    }));
   }, [
     pid,
     InspectorId,
@@ -698,8 +941,9 @@ export default function Edit(props) {
       return acc;
     }, {});
     console.log("datatoserver", data);
-    createProductDataService(data)
+    updateProductDataService(formdata.id, data)
       .then((response) => {
+        alert("update success");
         console.log(">>session", response);
       })
       .catch((error) => {

@@ -8,6 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import { pagesize } from "../services/addProductData";
 
 const useStyles = makeStyles({
   root: {
@@ -24,12 +25,12 @@ export default function MaterialTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const temp = [{
-   
-  }]
+  const temp = [{}];
 
   const handleChangePage = (event, newPage) => {
+    console.log(`newPage`, newPage);
     setPage(newPage);
+    props.getPagenatedData(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -55,32 +56,29 @@ export default function MaterialTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {props.columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {props.rows.map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  {props.columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.format && typeof value === "number"
+                          ? column.format(value)
+                          : value}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={props.rows.length}
-        rowsPerPage={rowsPerPage}
+        count={props.total}
+        rowsPerPage={pagesize}
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
