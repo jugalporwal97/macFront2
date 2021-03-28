@@ -105,36 +105,31 @@ function Form(props) {
             // autoFocus
           />
         ) : form.inputType === "select" ? (
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">
-              {form.label}
-            </InputLabel>
-
-            <Select
-              native
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              onChange={(e) => props.updateForm(e, form.id)}
-              label="Age"
-              value={form.formValue}
-              defaultValue={form.formValue}
-              inputProps={{
-                name: "age",
-                id: "outlined-age-native-simple",
-              }}
-            >
-              <option value=""></option>
-              {form.value.map((load) => {
-                return (
-                  <option value={load.val || load}>
-                    {load.payload || load}
-                  </option>
-                );
-              })}
-            </Select>
-          </FormControl>
+          <TextField
+            label={form.label}
+            select
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            onChange={(e) => props.updateForm(e, form.id)}
+            value={form.formValue}
+            defaultValue={form.formValue}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            SelectProps={{
+              native: true,
+            }}
+            hover
+          >
+            <option value=""></option>
+            {form.value.map((load) => {
+              return (
+                <option value={load.val || load}>{load.payload || load}</option>
+              );
+            })}
+          </TextField>
         ) : null;
       })
     : null;
