@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router";
 import Modals from "../Modals/Modals";
 import {
   deleteBranchesService,
@@ -43,13 +44,22 @@ function ShowBranches(props) {
             ...val,
             bankId: props?.value.find((obj) => obj.val == val.bankId)?.payload,
             edit: (
-              <Button variant="contained" color="primary">
-                <Modals
-                  editable={edit}
-                  onhandleUpdate={handleUpdate}
-                  name={"edit"}
-                  data={val}
-                />
+              // <Button variant="contained" color="primary">
+              //   <Modals
+              //     editable={edit}
+              //     onhandleUpdate={handleUpdate}
+              //     name={"edit"}
+              //     data={val}
+              //   />
+              // </Button>
+              <Button
+                value={"edit"}
+                variant="contained"
+                onClick={() => buttonClick(val)}
+                color="primary"
+              >
+                {" "}
+                edit
               </Button>
             ),
             delete: (
@@ -83,6 +93,16 @@ function ShowBranches(props) {
   useEffect(() => {
     getPagenatedData(0);
   }, [props?.value]);
+
+  const buttonClick = (e) => {
+    console.log(`>>id,val`, e);
+    // props.history.push("/addProductData");
+    props.history.push({
+      pathname: "/editBank",
+      search: "",
+      state: { detail: e },
+    });
+  };
 
   // useEffect(() => {
   //   getAllBranches()
@@ -129,4 +149,4 @@ function ShowBranches(props) {
   );
 }
 
-export default ShowBranches;
+export default withRouter(ShowBranches);

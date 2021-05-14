@@ -22,6 +22,7 @@ import AccessManager from "./AccessManager/AccessManager";
 import Modals from "./Modals/Modals";
 import Moment from "react-moment";
 import Edit from "./Edit/Edit";
+import EditBank from "./Edit/EditBank";
 import "moment-timezone";
 import {
   deleteBranchesService,
@@ -199,6 +200,36 @@ function App() {
                     <AdminNavBar />
                     <div className="">
                       <Edit />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                      <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/editBank"
+            render={() => (
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <EditBank />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                      <EditBank />
                     </div>
                   </div>
                 ) : (
