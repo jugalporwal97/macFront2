@@ -4,6 +4,7 @@ import Modals from "../Modals/Modals";
 import {
   deleteBranchesService,
   getAllBranches,
+  getPagenatedBranches,
   updateBranchesService,
 } from "../services/branches";
 
@@ -13,6 +14,7 @@ function ShowBranches(props) {
   //   const [row, setrow] = useState(initialState);
 
   const [Users, setUsers] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["name", "bankId"]);
@@ -32,9 +34,10 @@ function ShowBranches(props) {
     },
   ]);
 
-  useEffect(() => {
-    getAllBranches()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedBranches(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((val) => {
           return {
             ...val,
@@ -76,7 +79,16 @@ function ShowBranches(props) {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, [props?.value]);
+
+  // useEffect(() => {
+  //   getAllBranches()
+  //     .then((response) => {
+
+  // }, [props?.value]);
 
   const handleDelete = (id) => {
     deleteBranchesService(id)
@@ -107,7 +119,12 @@ function ShowBranches(props) {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Users} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Users ? Users : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

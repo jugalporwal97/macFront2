@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import {
   deleteInspectorService,
   getAllInspector,
+  getPagenatedInspectorDataServise,
   updateInspectorService,
 } from "../services/inspector";
 
@@ -12,6 +13,7 @@ import MaterialTable from "../Table/Table";
 function ShowInspector() {
   //   const [row, setrow] = useState(initialState);
   const [Cities, setCities] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Cities?{...Cities}
 
@@ -31,9 +33,10 @@ function ShowInspector() {
     },
   ]);
 
-  useEffect(() => {
-    getAllInspector()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedInspectorDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -67,7 +70,15 @@ function ShowInspector() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+  // useEffect(() => {
+  //   getAllInspector()
+  //     .then((response) => {
+
+  // }, []);
 
   const handleDelete = (id) => {
     deleteInspectorService(id)
@@ -101,7 +112,12 @@ function ShowInspector() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities}
+        columns={columns}
+      />
     </div>
   );
 }

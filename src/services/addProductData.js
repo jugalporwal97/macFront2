@@ -4,7 +4,7 @@ import {
   patchRequest,
   postRequest,
 } from "./request";
-export const pagesize = 10;
+export const pagesize = 5;
 
 const ENDPOINT = "product-data";
 export const createProductDataService = (params) => {

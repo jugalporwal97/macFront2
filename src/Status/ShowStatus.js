@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import {
   deleteStatusService,
   getAllStatus,
+  getPagenatedStatusDataServise,
   updateStatusService,
 } from "../services/status";
 import MaterialTable from "../Table/Table";
@@ -11,6 +12,7 @@ import MaterialTable from "../Table/Table";
 function ShowStatus() {
   //   const [row, setrow] = useState(initialState);
   const [Cities, setCities] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Cities?{...Cities}
 
@@ -30,9 +32,11 @@ function ShowStatus() {
     },
   ]);
 
-  useEffect(() => {
-    getAllStatus()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedStatusDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
+
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -66,7 +70,15 @@ function ShowStatus() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllStatus()
+  //     .then((response) => {
+  // }, []);
 
   const handleDelete = (id) => {
     deleteStatusService(id)
@@ -100,7 +112,12 @@ function ShowStatus() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities ? Cities : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

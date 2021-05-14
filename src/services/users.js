@@ -4,7 +4,13 @@ import {
   patchRequest,
   postRequest,
 } from "./request";
+export const pagesize = 5;
 
+export const getPagenatedUsersDataServise = (pagenumber = 0) => {
+  return getRequest(
+    `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
+  );
+};
 const ENDPOINT = "users";
 export const createUserService = (params) => {
   const body = { ...params };
@@ -20,6 +26,5 @@ export const deleteUserService = (id) => {
 };
 
 export const updateuserService = (id, value) => {
-  
   return patchRequest(`${ENDPOINT}/${id}`, value);
 };

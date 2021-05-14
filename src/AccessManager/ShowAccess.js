@@ -4,6 +4,7 @@ import Modals from "../Modals/Modals";
 import {
   deleteUseraccessDataService,
   getAllUseraccessData,
+  getPagenatedaccessDataServise,
 } from "../services/access";
 import {
   deleteBranchesService,
@@ -17,6 +18,7 @@ function ShowAccess(props) {
   //   const [row, setrow] = useState(initialState);
 
   const [Users, setUsers] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["name", "bankId"]);
@@ -30,10 +32,10 @@ function ShowAccess(props) {
       minWidth: 150,
     },
   ]);
-
-  useEffect(() => {
-    getAllUseraccessData()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedaccessDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((val) => {
           return {
             ...val,
@@ -67,7 +69,16 @@ function ShowAccess(props) {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, [props?.value]);
+
+  // useEffect(() => {
+  //   getAllUseraccessData()
+  //     .then((response) => {
+
+  // }, [props?.value]);
 
   const handleDelete = (id) => {
     deleteUseraccessDataService(id)
@@ -85,7 +96,12 @@ function ShowAccess(props) {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Users} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Users}
+        columns={columns}
+      />
     </div>
   );
 }

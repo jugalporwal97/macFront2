@@ -4,7 +4,13 @@ import {
   patchRequest,
   postRequest,
 } from "./request";
+export const pagesize = 5;
 
+export const getPagenatedProductDataServise = (pagenumber = 0) => {
+  return getRequest(
+    `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
+  );
+};
 const ENDPOINT = "products";
 export const createproductsService = (params) => {
   return postRequest(ENDPOINT, params);

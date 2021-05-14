@@ -5,6 +5,7 @@ import Modals from "../Modals/Modals";
 import {
   deleteContactPersonService,
   getAllContactPerson,
+  getPagenatedContactPersonDataServise,
   updateContactPersonService,
 } from "../services/contactPerson";
 
@@ -16,6 +17,7 @@ function ShowContactPerson() {
 
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["name", "contact"]);
+  const [total, settotal] = useState(0);
 
   const [columns, setColumns] = useState([
     { id: "name", label: "Contact Person", minWidth: 150 },
@@ -32,9 +34,10 @@ function ShowContactPerson() {
     },
   ]);
 
-  useEffect(() => {
-    getAllContactPerson()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedContactPersonDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -75,7 +78,55 @@ function ShowContactPerson() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllContactPerson()
+  //     .then((response) => {
+  //       const body = Object.values(response.data).map((value) => {
+  //         return {
+  //           ...value,
+  //           edit: (
+  //             <Button variant="contained" color="primary">
+  //               <Modals
+  //                 editable={edit}
+  //                 onhandleUpdate={handleUpdate}
+  //                 name={"edit"}
+  //                 data={value}
+  //               />
+  //             </Button>
+  //           ),
+  //           delete: (
+  //             <Button
+  //               onClick={() => handleDelete(value.id)}
+  //               variant="contained"
+  //               color="secondary"
+  //             >
+  //               Delete
+  //             </Button>
+  //           ),
+  //         };
+  //       });
+
+  //       // console.log(
+  //       //   body.map((bof) => {
+  //       //     return bof.type === 1
+  //       //       ? (bof.type = "OWNER")
+  //       //       : bof.type === 2
+  //       //       ? (bof.type = "ADMIN")
+  //       //       : (bof.type = "USER");
+  //       //   })
+  //       // );
+
+  //       setUsers(body);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Something went wrong. Please try again later.");
+  //     });
+  // }, []);
 
   const handleDelete = (id) => {
     deleteContactPersonService(id)
@@ -106,7 +157,12 @@ function ShowContactPerson() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Users} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Users}
+        columns={columns}
+      />
     </div>
   );
 }

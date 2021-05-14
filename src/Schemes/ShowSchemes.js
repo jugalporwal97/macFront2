@@ -5,12 +5,14 @@ import {
   getAllSchemes,
   updateSchemesService,
 } from "../services/schemes";
+import { getPagenatedCityDataServise } from "../services/state";
 
 import MaterialTable from "../Table/Table";
 
 function ShowSchemes() {
   //   const [row, setrow] = useState(initialState);
   const [Cities, setCities] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Cities?{...Cities}
 
@@ -30,9 +32,10 @@ function ShowSchemes() {
     },
   ]);
 
-  useEffect(() => {
-    getAllSchemes()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedCityDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -66,7 +69,16 @@ function ShowSchemes() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllSchemes()
+  //     .then((response) => {
+
+  // }, []);
 
   const handleDelete = (id) => {
     deleteSchemesService(id)
@@ -100,7 +112,12 @@ function ShowSchemes() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities ? Cities : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

@@ -5,6 +5,14 @@ import {
   postRequest,
 } from "./request";
 
+export const pagesize = 5;
+
+export const getPagenatedCityDataServise = (pagenumber = 0) => {
+  return getRequest(
+    `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
+  );
+};
+
 const ENDPOINT = "cities";
 export const createStateService = (params) => {
   return postRequest(ENDPOINT, params);

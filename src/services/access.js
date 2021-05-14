@@ -1,5 +1,12 @@
 import { deleteRequest, getRequest, postRequest } from "./request";
 
+export const pagesize = 5;
+
+export const getPagenatedaccessDataServise = (pagenumber = 0) => {
+  return getRequest(
+    `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
+  );
+};
 const ENDPOINT = "access-manager";
 export const createUseraccessService = (params) => {
   return postRequest(ENDPOINT, params);

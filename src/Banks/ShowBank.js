@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   deleteBankService,
   getAllBank,
+  getPagenatedBankDataServise,
   updateBankService,
 } from "../services/bank";
 import {
@@ -15,6 +16,7 @@ import MaterialTable from "../Table/Table";
 function ShowBank() {
   //   const [row, setrow] = useState(initialState);
   const [Cities, setCities] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Cities?{...Cities}
 
@@ -34,9 +36,11 @@ function ShowBank() {
     },
   ]);
 
-  useEffect(() => {
-    getAllBank()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedBankDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
+
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -69,7 +73,19 @@ function ShowBank() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllBank()
+  //     .then((response) => {
+  //     })
+  //     .catch((error) => {
+  //       console.log("Something went wrong. Please try again later.");
+  //     });
+  // }, []);
 
   const handleDelete = (id) => {
     deleteBankService(id)
@@ -103,7 +119,12 @@ function ShowBank() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities ? Cities : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

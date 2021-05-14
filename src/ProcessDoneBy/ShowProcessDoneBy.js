@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import {
   deleteProcessDoneByService,
   getAllProcessDoneBy,
+  getPagenatedProcessDonrByDataServise,
   updateProcessDoneByService,
 } from "../services/processDoneBy";
 import {
@@ -34,10 +35,11 @@ function ShowProcessDoneBy() {
       align: "right",
     },
   ]);
-
-  useEffect(() => {
-    getAllProcessDoneBy()
+  const [total, settotal] = useState(0);
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedProcessDonrByDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -70,7 +72,16 @@ function ShowProcessDoneBy() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllProcessDoneBy()
+  //     .then((response) => {
+
+  // }, []);
 
   const handleDelete = (id) => {
     deleteProcessDoneByService(id)
@@ -104,7 +115,12 @@ function ShowProcessDoneBy() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities ? Cities : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

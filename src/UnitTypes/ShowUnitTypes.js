@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   deleteunitTypesService,
   getAllunitTypes,
+  getPagenatedUnitDataServise,
   updateunitTypesService,
 } from "../services/unitTypes";
 
@@ -13,6 +14,7 @@ function ShowUnitTypes() {
   const [Cities, setCities] = useState([]);
 
   // const rows = Cities?{...Cities}
+  const [total, settotal] = useState(0);
 
   const [columns, setColumns] = useState([
     { id: "name", label: "UnitTypes", minWidth: 170 },
@@ -30,9 +32,10 @@ function ShowUnitTypes() {
     },
   ]);
 
-  useEffect(() => {
-    getAllunitTypes()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedUnitDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((value) => {
           return {
             ...value,
@@ -66,7 +69,20 @@ function ShowUnitTypes() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   getAllunitTypes()
+  //     .then((response) => {
+
+  //     })
+  //     .catch((error) => {
+  //       console.log("Something went wrong. Please try again later.");
+  //     });
+  // }, []);
 
   const handleDelete = (id) => {
     deleteunitTypesService(id)
@@ -100,7 +116,12 @@ function ShowUnitTypes() {
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
-      <MaterialTable rows={Cities} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Cities ? Cities : window.location.reload()}
+        columns={columns}
+      />
     </div>
   );
 }

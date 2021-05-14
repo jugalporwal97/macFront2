@@ -4,6 +4,7 @@ import Modals from "../Modals/Modals";
 
 import {
   deleteUserService,
+  getPagenatedUsersDataServise,
   showUserService,
   updateuserService,
 } from "../services/users";
@@ -12,6 +13,7 @@ import MaterialTable from "../Table/Table";
 function UserDetails() {
   //   const [row, setrow] = useState(initialState);
   const [Users, setUsers] = useState([]);
+  const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["fullName", "email"]);
@@ -31,10 +33,10 @@ function UserDetails() {
       minWidth: 150,
     },
   ]);
-
-  useEffect(() => {
-    showUserService()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedUsersDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         console.log("responsedatauserDetails", response.data);
         const body = Object.values(response.data).map((value) => {
           return {
@@ -76,7 +78,16 @@ function UserDetails() {
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+    getPagenatedData(0);
   }, []);
+
+  // useEffect(() => {
+  //   showUserService()
+  //     .then((response) => {
+
+  // }, []);
 
   const handleDelete = (id) => {
     deleteUserService(id)
@@ -114,7 +125,12 @@ function UserDetails() {
         marginTop: "100px",
       }}
     >
-      <MaterialTable rows={Users} columns={columns} />
+      <MaterialTable
+        total={total}
+        getPagenatedData={getPagenatedData}
+        rows={Users}
+        columns={columns}
+      />
     </div>
   );
 }

@@ -957,7 +957,7 @@ export default function Edit(props) {
         FormGenerater={Object.values(FormGenerater)}
         submitForm={submitForm}
         updateForm={updateForm}
-        title={"ADD Product Data"}
+        title={"EDIT Product Data"}
       />
     </div>
   );

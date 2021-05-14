@@ -34,6 +34,7 @@ export default function MaterialTable(props) {
   };
 
   const handleChangeRowsPerPage = (event) => {
+    console.log(">>Clicked");
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
