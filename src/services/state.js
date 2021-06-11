@@ -5,7 +5,7 @@ import {
   postRequest,
 } from "./request";
 
-export const pagesize = 5;
+export const pagesize = 50;
 
 export const getPagenatedCityDataServise = (pagenumber = 0) => {
   return getRequest(

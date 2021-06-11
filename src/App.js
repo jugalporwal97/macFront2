@@ -40,6 +40,7 @@ import HomeCom from "./Home/Home";
 import AdminNavBar from "./NavBar/AdminNavBar";
 import AdminHome from "./Home/AdminHome";
 import UserHome from "./Home/UserHome";
+import Search from "./Search/Search";
 
 function App() {
   return (
@@ -83,6 +84,38 @@ function App() {
                     <UserNavBar />
                     <div className="">
                       <UserHome />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
+            )}
+          />
+
+
+<Route
+            exact
+            path="/search"
+            render={() => (
+              <React.Fragment>
+                {getUser().type == 1 ? (
+                  <div>
+                    <OwnerNavBar />
+                    <div className="">
+                      <Search />
+                    </div>
+                  </div>
+                ) : getUser().type == 2 ? (
+                  <div>
+                    <AdminNavBar />
+                    <div className="">
+                    <Search />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <UserNavBar />
+                    <div className="">
+                    <Search />
                     </div>
                   </div>
                 )}

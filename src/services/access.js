@@ -1,6 +1,6 @@
 import { deleteRequest, getRequest, postRequest } from "./request";
 
-export const pagesize = 5;
+export const pagesize = 50;
 
 export const getPagenatedaccessDataServise = (pagenumber = 0) => {
   return getRequest(

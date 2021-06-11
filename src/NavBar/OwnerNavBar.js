@@ -35,6 +35,9 @@ const OwnerNavBar = (props) => {
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
             <Button color="inherit">Show Products</Button>
           </Link>
+          <Link to="/search" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit">Search</Button>
+          </Link>
 
           <Link
             to="/createProduct"

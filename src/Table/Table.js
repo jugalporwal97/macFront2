@@ -28,14 +28,15 @@ export default function MaterialTable(props) {
   const temp = [{}];
 
   const handleChangePage = (event, newPage) => {
+    console.log("clicked")
     console.log(`newPage`, newPage);
     setPage(newPage);
     props.getPagenatedData(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log(">>Clicked");
-    setRowsPerPage(+event.target.value);
+    console.log(">>Clicked",event.target.value);
+    setRowsPerPage(event.target.value);
     setPage(0);
   };
 

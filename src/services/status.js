@@ -4,7 +4,7 @@ import {
   patchRequest,
   postRequest,
 } from "./request";
-export const pagesize = 5;
+export const pagesize = 50;
 
 const ENDPOINT = "statuses";
 export const createStatusService = (params) => {
