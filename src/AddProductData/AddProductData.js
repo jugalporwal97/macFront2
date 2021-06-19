@@ -725,7 +725,11 @@ function AddProductData() {
   const updateForm = (e, id) => {
     e.preventDefault();
 
+
+
     const value = e.target.value;
+
+ 
 
 
     setFormGenerator((prev) => {
