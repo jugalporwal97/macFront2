@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { removeUserSession } from "../Utils/Common";
+import { getUser, removeUserSession } from "../Utils/Common";
 import { Link, withRouter } from "react-router-dom";
 
 import "./AdminNavBar.css";
@@ -29,7 +29,7 @@ const AdminNavBar = (props) => {
         <Toolbar>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
             <Typography variant="h6" className={classes.title}>
-              Hi, NAME
+            Hi, {getUser().fullName}
             </Typography>
           </Link>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
