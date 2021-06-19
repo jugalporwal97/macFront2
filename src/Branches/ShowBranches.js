@@ -95,7 +95,7 @@ function ShowBranches(props) {
   }, [props?.value]);
 
   const buttonClick = (e) => {
-    console.log(`>>id,val`, e);
+
     // props.history.push("/addProductData");
     props.history.push({
       pathname: "/editBank",

@@ -4,7 +4,7 @@ import "./Edit.css";
 
 import Form from "../Form/Form";
 import { updateBranchesService } from "../services/branches";
-import { getAllBank } from "../services/bank";
+import { getAllBank, getPagenatedBankDataServise } from "../services/bank";
 import { getAllBranches } from "../services/branches";
 
 function EditBank(props) {
@@ -12,59 +12,39 @@ function EditBank(props) {
 
   const formdata = location.state.detail;
 
-  console.log(`formdata`, formdata);
+
 
   const [bid, setbid] = useState([]);
-  const [braid, setbraid] = useState([]);
-  const [branchData, setbranchData] = useState([]);
+
 
   const [FormGenerater, setFormGenerator] = useState({});
   useEffect(() => {
     getAllBank()
-      .then((response) => {
-        let value = [];
+    .then(async (response) => {
+      const getPagenatedData = (pagenumber) => {
+        getPagenatedBankDataServise(pagenumber)
+          .then((response) => {
+            setbid((prev) => [...prev, ...response.data]);
+          })
+          .catch((error) => {
+            console.log("Something went wrong. Please try again later.");
+          });
+      };
 
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
+      for (let index = 0; index < response.total / 10; index++) {
+        await getPagenatedData(index);
+      }
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
-        }
+    })
+    .catch((error) => {
+      console.log("Something went wrong. Please try again later.");
+    });
 
-        setbid(value);
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-    getAllBranches()
-      .then((response) => {
-        console.log("branchesdata", response.data);
-        setbranchData(response.data);
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
-
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
-        }
-
-        setbraid(value);
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  }, []);
+    
+}, []);
   useEffect(() => {
     setFormGenerator((prevValues) => {
-      console.log(`<<<<formdata`, formdata.name);
+  
       const x = {
         ...prevValues,
 
@@ -77,13 +57,24 @@ function EditBank(props) {
           formValue: formdata.name,
         },
       };
-      console.log("<<<<XXXX", x);
+
 
       return x;
     });
   }, []);
 
   useEffect(() => {
+    const body = Object.values(bid).map((k, v) => {
+      return k.id;
+    });
+    const body2 = Object.values(bid).map((k, v) => {
+      return k.name;
+    });
+    const value = [];
+    for (let index = 0; index < body.length; index++) {
+      value.push({ val: body[index], payload: body2[index] });
+    }
+
     setFormGenerator((prevValues) => ({
       bankId: {
         ...prevValues["bankId"],
@@ -91,7 +82,7 @@ function EditBank(props) {
         backendLabel: "bankId",
 
         label: "Bank Name",
-        value: bid,
+        value: value,
 
         id: "bankId",
 
@@ -107,14 +98,14 @@ function EditBank(props) {
         inputType: "text",
       },
     }));
-  }, [bid, braid]);
+  }, [bid]);
 
   const updateForm = (e, id) => {
     e.preventDefault();
 
     const value = e.target.value;
 
-    console.log("valueselected", value, typeof value);
+
     setFormGenerator((prev) => {
       let val;
 
@@ -123,7 +114,6 @@ function EditBank(props) {
         val = null;
       }
 
-      console.log(typeof val);
       return {
         ...prev,
         [id]: {
@@ -136,7 +126,7 @@ function EditBank(props) {
   const submitForm = (e) => {
     e.preventDefault();
 
-    console.log(">>brachdata", branchData);
+
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       if (
@@ -149,7 +139,7 @@ function EditBank(props) {
         item.name == "stateDate" ||
         item.name == "referenceDate"
       ) {
-        console.log("checkcheck", item);
+  
         item.formValue = new Date(item.formValue);
       }
       if (item.formValue == "") {
@@ -169,7 +159,7 @@ function EditBank(props) {
     updateBranchesService(formdata.id, data)
       .then((response) => {
         alert("update success");
-        console.log(">>session", response);
+
         props.history.push("/createProduct");
       })
       .catch((error) => {

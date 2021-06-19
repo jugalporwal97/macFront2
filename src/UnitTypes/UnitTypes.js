@@ -37,17 +37,17 @@ function UnitTypes() {
   const submitForm = (e) => {
     e.preventDefault();
 
-    console.log("aaaa", FormGenerater);
+
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("valuesss", data);
+  
 
     createunitTypesService(data)
       .then((response) => {
-        console.log(">>session", response);
+
         window.location.reload();
       })
       .catch((error) => {

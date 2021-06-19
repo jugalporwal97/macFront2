@@ -42,7 +42,6 @@ function MarketingPerson() {
     e.preventDefault();
 
     const value = e.target.value;
-    console.log("valueselected",value)
     setFormGenerator((prev) => {
       return {
         ...prev,
@@ -61,10 +60,9 @@ function MarketingPerson() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-  console.log("datatoserver",data)
   createMarketingPersonService(data)
       .then((response) => {
-        console.log(">>session", response);
+   
         window.location.reload();
       })
       .catch((error) => {

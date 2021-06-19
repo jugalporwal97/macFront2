@@ -112,7 +112,7 @@ function CreateUser() {
     createUserService(data)
       .then((response) => {
         alert("Form Successfully Submited.");
-        console.log(">>session", response);
+
       })
       .catch((error) => {
         alert("Enter Correct Values Some Error.");

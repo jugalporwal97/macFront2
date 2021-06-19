@@ -17,7 +17,7 @@ export const getUser = () => {
    
   // set the token and user from the session storage
   export const setUserSession = (token, user) => {
-    console.log("from setusersession",token)
+
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('user', JSON.stringify(user));
   }

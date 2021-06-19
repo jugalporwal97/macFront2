@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Form from "../Form/Form";
 import { createProductDataService } from "../services/addProductData";
-import { getAllBank } from "../services/bank";
-import { getAllBranches } from "../services/branches";
-import { getAllcategories } from "../services/categories";
-import { getAllContactPerson } from "../services/contactPerson";
-import { getAllInspector } from "../services/inspector";
-import { getAllMarketingPerson } from "../services/marketingPerson";
-import { getAllProcessDoneBy } from "../services/processDoneBy";
-import { getAllproducts } from "../services/products";
-import { getAllSchemes } from "../services/schemes";
-import { getAllStates } from "../services/state";
-import { getAllStatus } from "../services/status";
-import { getAllunitTypes } from "../services/unitTypes";
+import { getAllBank, getPagenatedBankDataServise } from "../services/bank";
+import { getAllBranches, getPagenatedBranches } from "../services/branches";
+import { getAllcategories, getPagenatedCategoriesDataServise } from "../services/categories";
+import { getAllContactPerson, getPagenatedContactPersonDataServise } from "../services/contactPerson";
+import { getAllInspector, getPagenatedInspectorDataServise } from "../services/inspector";
+import { getAllMarketingPerson, getPagenatedMarketingPDataServise, getPagenatedMarketingPDataServisee } from "../services/marketingPerson";
+import { getAllProcessDoneBy, getPagenatedProcessDonrByDataServise } from "../services/processDoneBy";
+import { getAllproducts, getPagenatedProductDataServise } from "../services/products";
+import { getAllSchemes, getPagenatedSchemesDataServise } from "../services/schemes";
+import { getAllStates, getPagenatedCityDataServise } from "../services/state";
+import { getAllStatus, getPagenatedStatusDataServise } from "../services/status";
+import { getAllunitTypes, getPagenatedUnitDataServise } from "../services/unitTypes";
 
 function AddProductData() {
   const [pid, setpid] = useState([]);
@@ -28,217 +28,263 @@ function AddProductData() {
   const [Shid, setShid] = useState([]);
   const [proid, setproid] = useState([]);
   const [FormGenerater, setFormGenerator] = useState({});
+
+  const [product,setProduct] = useState([]);
+  const [unitid, setunitid] = useState([]);
+  const [Inspector, setInspector] = useState([]);
+  const [contact, setcontact] = useState([]);
+  const [bankid, setbankid] = useState([]);
+  const [branchid, setbranchid] = useState([]);
+  const [cityid, setcityid] = useState([]);
+  const [marPerson, setmarPerson] = useState([]);
+  const [status, setstatus] = useState([]);
+  const [Categoriesid, setCategoriesid] = useState([]);
+  const [Schmeid, setSchmeid] = useState([]);
+  const [processdonebyid, setprocessdonebyid] = useState([]);
+
+
+
   useEffect(() => {
     getAllproducts()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
+    .then(async (response) => {
+      const getPagenatedData = (pagenumber) => {
+        getPagenatedProductDataServise(pagenumber)
+          .then((response) => {
+            setProduct((prev) => [...prev, ...response.data]);
+          })
+          .catch((error) => {
+            console.log("Something went wrong. Please try again later.");
+          });
+      };
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
-        }
-
-        setpid(value);
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-
+      for (let index = 0; index < response.total / 10; index++) {
+        await getPagenatedData(index);
+      }
+    })
+    .catch((error) => {
+      console.log("Something went wrong. Please try again later.");
+    })
+   
     getAllunitTypes()
-      .then((response) => {
-        const value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedUnitDataServise(pagenumber)
+            .then((response) => {
+              setunitid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-        setuid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
 
-    getAllInspector()
-      .then((response) => {
-        const value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
+      getAllInspector()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedInspectorDataServise(pagenumber)
+            .then((response) => {
+              setInspector((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-        setInspectorId(value);
+      })
+      .catch((error) => {
+        console.log("Something went wrong. Please try again later.");
+      });
+      getAllContactPerson()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedContactPersonDataServise(pagenumber)
+            .then((response) => {
+              setcontact((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
+        }
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
 
-    getAllContactPerson()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
+      getAllBank()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedBankDataServise(pagenumber)
+            .then((response) => {
+              setbankid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setcontactid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllBank()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllBranches()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedBranches(pagenumber)
+            .then((response) => {
+              setbranchid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setbid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllBranches()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllStates()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedCityDataServise(pagenumber)
+            .then((response) => {
+              setcityid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setbraid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllStates()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllMarketingPerson()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedMarketingPDataServise(pagenumber)
+            .then((response) => {
+              setmarPerson((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setcid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllMarketingPerson()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllStatus()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedStatusDataServise(pagenumber)
+            .then((response) => {
+              setstatus((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setmpid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllStatus()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllcategories()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedCategoriesDataServise(pagenumber)
+            .then((response) => {
+              setCategoriesid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setstid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllcategories()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllSchemes()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedSchemesDataServise(pagenumber)
+            .then((response) => {
+              setSchmeid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setCatid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
-    getAllSchemes()
-      .then((response) => {
-        let value = [];
-        const body = Object.values(response.data).map((k, v) => {
-          return k.id;
-        });
-        const body2 = Object.values(response.data).map((k, v) => {
-          return k.name;
-        });
 
-        for (let index = 0; index < body.length; index++) {
-          value.push({ val: body[index], payload: body2[index] });
+      getAllProcessDoneBy()
+      .then(async (response) => {
+        const getPagenatedData = (pagenumber) => {
+          getPagenatedProcessDonrByDataServise(pagenumber)
+            .then((response) => {
+              setprocessdonebyid((prev) => [...prev, ...response.data]);
+            })
+            .catch((error) => {
+              console.log("Something went wrong. Please try again later.");
+            });
+        };
+
+        for (let index = 0; index < response.total / 10; index++) {
+          await getPagenatedData(index);
         }
-
-        setShid(value);
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+
+
     getAllProcessDoneBy()
       .then((response) => {
         let value = [];
@@ -260,7 +306,47 @@ function AddProductData() {
       });
   }, []);
 
+  const convertToformData =  (p) =>{
+    let value = [];
+
+    const body = Object.values(p).map((k, v) => {
+      return k.id;
+    });
+    const body2 = Object.values(p).map((k, v) => {
+      return k.name;
+    });
+
+    for (let index = 0; index < body.length; index++) {
+      value.push({ val: body[index], payload: body2[index] });
+    }
+    return value
+
+
+  }
+
+
   useEffect(() => {
+
+      setpid(convertToformData(product));
+      setuid(convertToformData(unitid));
+      setInspectorId(convertToformData(Inspector));
+      setcontactid(convertToformData(contact));
+      setbid(convertToformData(bankid));
+      setbraid(convertToformData(branchid));
+      setcid(convertToformData(cityid));
+      setmpid(convertToformData(marPerson));
+      setstid(convertToformData(status));
+      setCatid(convertToformData(Categoriesid));
+      setShid(convertToformData(Schmeid));
+      setproid(convertToformData(processdonebyid));
+
+
+  }, [processdonebyid,Schmeid,Categoriesid,status,marPerson,cityid,product,unitid,Inspector,contact,bankid,branchid])
+
+  useEffect(() => {
+
+
+    
     setFormGenerator({
       productId: {
         name: "productId",
@@ -641,7 +727,7 @@ function AddProductData() {
 
     const value = e.target.value;
 
-    console.log("valueselected", value, typeof value);
+
     setFormGenerator((prev) => {
       let val;
 
@@ -650,7 +736,7 @@ function AddProductData() {
         val = null;
       }
 
-      console.log(typeof val);
+
       return {
         ...prev,
         [id]: {
@@ -674,7 +760,7 @@ function AddProductData() {
         item.name == "stateDate" ||
         item.name == "referenceDate"
       ) {
-        console.log("checkcheck", item);
+  
         item.formValue = new Date(item.formValue);
       }
       if (item.formValue == "") {
@@ -684,11 +770,11 @@ function AddProductData() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("datatoserver", data);
+
     createProductDataService(data)
       .then((response) => {
         alert("Form Successfully Submited.");
-        console.log(">>session", response);
+
       })
       .catch((error) => {
         alert("Enter Correct Values Some Error.");

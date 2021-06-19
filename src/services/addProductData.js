@@ -16,7 +16,9 @@ export const getPagenatedDataServise = (pagenumber = 0) => {
     `${ENDPOINT}?$limit=${pagesize}&$skip=${pagenumber * pagesize}`
   );
 };
-
+export const getAllProductDataById = (id) => {
+  return getRequest(`${ENDPOINT}/${id}`);
+};
 export const getAllProductData = () => {
   return getRequest(ENDPOINT);
 };

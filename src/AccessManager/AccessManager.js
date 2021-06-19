@@ -47,7 +47,7 @@ function AccessManager() {
 
     showUserService()
       .then((response) => {
-        console.log(">>userData", response.data);
+   
         let value = [];
         const body = Object.values(response.data).map((k, v) => {
           return k.id;
@@ -136,7 +136,7 @@ function AccessManager() {
 
     const value = e.target.value;
 
-    console.log("valueselected", value, typeof value);
+ 
     setFormGenerator((prev) => {
       let val;
 
@@ -145,7 +145,7 @@ function AccessManager() {
         val = null;
       }
 
-      console.log(typeof val);
+  
       return {
         ...prev,
         [id]: {
@@ -175,11 +175,11 @@ function AccessManager() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("datatoserver", data);
+
     createUseraccessService(data)
       .then((response) => {
         alert("Form Successfully Submited.");
-        console.log(">>session", response);
+
       })
       .catch((error) => {
         alert("Check Table Already Added");

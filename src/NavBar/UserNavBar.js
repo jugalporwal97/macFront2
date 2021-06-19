@@ -43,7 +43,7 @@ const UserNavBar = (props) => {
             color="inherit"
             onClick={() => {
               removeUserSession();
-              console.log("logout");
+
               props.history.push("/login");
             }}
           >

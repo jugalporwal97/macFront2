@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MaterialTable(props) {
+export default function MaterialTableWithoutpagination(props) {
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -27,12 +27,13 @@ export default function MaterialTable(props) {
   const temp = [{}];
 
   const handleChangePage = (event, newPage) => {
- 
+
     setPage(newPage);
     props.getPagenatedData(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+
     setRowsPerPage(event.target.value);
     setPage(0);
   };
@@ -73,15 +74,18 @@ export default function MaterialTable(props) {
             })}
           </TableBody>
         </Table>
+        <div style={{    marginTop: "2%"}}></div>
       </TableContainer>
-      <TablePagination
+
+
+      {/* <TablePagination
         component="div"
         count={props.total}
         rowsPerPage={pagesize}
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+      /> */}
     </Paper>
   );
 }

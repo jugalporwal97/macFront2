@@ -22,7 +22,7 @@ function ShowLogs() {
   useEffect(() => {
     getAlllogs()
       .then((response) => {
-        console.log("responselogsDetails",response.data)
+  
         const body = Object.values(response.data).map((value) => {
           return {
             ...value

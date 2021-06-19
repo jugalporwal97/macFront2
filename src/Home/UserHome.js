@@ -228,7 +228,7 @@ function UserHome(props) {
   ]);
 
   useEffect(() => {
-    console.log(">>user", getUser());
+
     getAllProductData()
       .then((response) => {
         const body = Object.values(response.data).map((val) => {
@@ -317,7 +317,7 @@ function UserHome(props) {
         //       : (bof.type = "USER");
         //   })
         // );
-        console.log(">>body", body);
+
 
         const allu = Object.values(body).map((bo) => {
           return {
@@ -353,7 +353,7 @@ function UserHome(props) {
       });
   }, []);
   const buttonClick = (e) => {
-    console.log(`>>id,val`, e);
+
     // props.history.push("/addProductData");
     props.history.push({
       pathname: "/edit",
@@ -363,7 +363,7 @@ function UserHome(props) {
   };
 
   const searchSpace = (event) => {
-    console.log(event.target.value);
+
     let keyword = event.target.value;
     SetSearch(keyword);
   };
@@ -390,7 +390,6 @@ function UserHome(props) {
     }
     return true;
   });
-  console.log(">>getuser", getUser());
   return (
     <div className="table">
       <div className="TextField">

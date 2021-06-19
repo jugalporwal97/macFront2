@@ -54,15 +54,7 @@ function ShowAccess(props) {
           };
         });
 
-        // console.log(
-        //   body.map((bof) => {
-        //     return bof.type === 1
-        //       ? (bof.type = "OWNER")
-        //       : bof.type === 2
-        //       ? (bof.type = "ADMIN")
-        //       : (bof.type = "USER");
-        //   })
-        // );
+
 
         setUsers(body);
       })

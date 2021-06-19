@@ -26,7 +26,7 @@ export default function Edit(props) {
 
   const formdata = location.state.detail;
 
-  console.log(`formdata`, formdata);
+
   const [pid, setpid] = useState([]);
   const [uid, setuid] = useState([]);
   const [InspectorId, setInspectorId] = useState([]);
@@ -272,7 +272,7 @@ export default function Edit(props) {
       });
   }, []);
   useEffect(() => {
-    console.log(`inwardDate`, formdata.inwardDate);
+
     //     {id: 10, productId: 6, inwardDate: "2021-03-01T00:00:00.000Z", pan: "wqwq2", unitTypeId: 3, …}
     // acknowledgementNumber: "1234"
     // address: "wqwq"
@@ -327,7 +327,7 @@ export default function Edit(props) {
     // unitTypeId: 3
     // updatedAt: "2021-03-16T13:05:31.260Z"
     setFormGenerator((prevValues) => {
-      console.log(`<<<<formdata`, formdata);
+
       const x = {
         ...prevValues,
 
@@ -490,7 +490,7 @@ export default function Edit(props) {
           formValue: formdata.lastClaimQuarter,
         },
       };
-      console.log("<<<<XXXX", x);
+
 
       return x;
     });
@@ -897,7 +897,7 @@ export default function Edit(props) {
 
     const value = e.target.value;
 
-    console.log("valueselected", value, typeof value);
+
     setFormGenerator((prev) => {
       let val;
 
@@ -906,7 +906,6 @@ export default function Edit(props) {
         val = null;
       }
 
-      console.log(typeof val);
       return {
         ...prev,
         [id]: {
@@ -930,7 +929,7 @@ export default function Edit(props) {
         item.name == "stateDate" ||
         item.name == "referenceDate"
       ) {
-        console.log("checkcheck", item);
+
         item.formValue = new Date(item.formValue);
       }
       if (item.formValue == "") {
@@ -940,11 +939,11 @@ export default function Edit(props) {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("datatoserver", data);
+
     updateProductDataService(formdata.id, data)
       .then((response) => {
         alert("update success");
-        console.log(">>session", response);
+
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");

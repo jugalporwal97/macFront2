@@ -302,13 +302,6 @@ function HomeCom(props) {
               >
                 {" "}
                 edit
-                {/* <Edit data={val.id} /> */}
-                {/* <Modals
-                editable={edit}
-                onhandleUpdate={handleUpdate}
-                name={"edit"}
-                data={val}
-              /> */}
               </Button>
             ),
             delete: (
@@ -332,7 +325,7 @@ function HomeCom(props) {
         //       : (bof.type = "USER");
         //   })
         // );
-        console.log(">>body", body);
+
 
         const allu = Object.values(body).map((bo) => {
           return {
@@ -362,7 +355,7 @@ function HomeCom(props) {
         // console.log(">>temp", temp);
 
         setUsers((preValues) => {
-          console.log(`<<preValue,allu`, { preValues, allu });
+      ;
           return allu;
         });
       })
@@ -371,12 +364,11 @@ function HomeCom(props) {
       });
   };
   useEffect(() => {
-    console.log(">>user", getUser());
+
     getPagenatedData(0);
   }, []);
   const buttonClick = (e) => {
-    console.log(`>>id,val`, e);
-    // props.history.push("/addProductData");
+
     props.history.push({
       pathname: "/edit",
       search: "",
@@ -399,7 +391,7 @@ function HomeCom(props) {
   };
 
   const searchSpace = (event) => {
-    console.log(event.target.value);
+
     let keyword = event.target.value;
     SetSearch(keyword);
   };
@@ -418,7 +410,7 @@ function HomeCom(props) {
       });
   };
 
-  console.log(`<<<<Users`, Users);
+
   const row = Users.filter((row) => {
     if (Search) {
       return row.productId
@@ -428,16 +420,11 @@ function HomeCom(props) {
     }
     return true;
   });
-  console.log("<<<row", row);
+
   return (
     <div className="table">
       <div className="TextField">
-        <TextField
-          onChange={(e) => searchSpace(e)}
-          id="outlined-basic"
-          label="Search"
-          variant="outlined"
-        />
+  
       </div>
       <div className="table">
         <MaterialTable

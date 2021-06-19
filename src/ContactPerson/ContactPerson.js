@@ -41,7 +41,7 @@ function ContactPerson() {
     e.preventDefault();
 
     const value = e.target.value;
-    console.log("valueselected",value)
+
     setFormGenerator((prev) => {
       return {
         ...prev,
@@ -60,10 +60,10 @@ function ContactPerson() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-  console.log("datatoserver",data)
+
   createContactPersonService(data)
       .then((response) => {
-        console.log(">>session", response);
+
         window.location.reload();
       })
       .catch((error) => {

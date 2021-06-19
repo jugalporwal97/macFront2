@@ -12,7 +12,6 @@ export default function Modals(props) {
   const [scroll, setScroll] = React.useState("paper");
   const [val, setval] = React.useState(props.data);
 
-  console.log(`MOdalprops.data`, props.data);
 
   const handleClickOpen = () => () => {
     setOpen(true);

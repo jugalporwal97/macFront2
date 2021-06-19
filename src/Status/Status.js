@@ -42,11 +42,10 @@ function Status() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("valuesss", data);
+
 
     createStatusService(data)
       .then((response) => {
-        console.log(">>session", response);
         window.location.reload();
       })
       .catch((error) => {

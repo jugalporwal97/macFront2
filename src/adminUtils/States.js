@@ -21,7 +21,7 @@ function States() {
     
     const value = e.target.value;
     
-    console.log("cit",{value,id})
+
     setFormGenerator((prev) => {
       return {
         ...prev,
@@ -35,17 +35,15 @@ function States() {
   const submitForm = (e) => {
     e.preventDefault();
 
-    console.log("aaaa", FormGenerater);
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("valuesss", data);
 
     createStateService(data)
       .then((response) => {
-        console.log(">>session", response);
+
         window.location.reload();
       })
       .catch((error) => {

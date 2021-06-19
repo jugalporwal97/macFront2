@@ -41,11 +41,11 @@ function Schemes() {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("valuesss", data);
+
 
     createSchemesService(data)
       .then((response) => {
-        console.log(">>session", response);
+
         window.location.reload();
       })
       .catch((error) => {
