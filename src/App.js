@@ -41,6 +41,8 @@ import AdminNavBar from "./NavBar/AdminNavBar";
 import AdminHome from "./Home/AdminHome";
 import UserHome from "./Home/UserHome";
 import Search from "./Search/Search";
+import SearchAdmin from "./Search/SearchAdmin";
+import SearchUser from "./Search/SearchUser";
 
 function App() {
   return (
@@ -108,14 +110,14 @@ function App() {
                   <div>
                     <AdminNavBar />
                     <div className="">
-                    <Search />
+                    <SearchAdmin />
                     </div>
                   </div>
                 ) : (
                   <div>
                     <UserNavBar />
                     <div className="">
-                    <Search />
+                    <SearchUser />
                     </div>
                   </div>
                 )}
@@ -307,8 +309,7 @@ function App() {
             )}
           />
 
-          <Route exact path="/states" render={() => <States />} />
-          <Route exact path="/showstates" render={() => <ShowStates />} />
+
           <Route
             exact
             path="/Home"

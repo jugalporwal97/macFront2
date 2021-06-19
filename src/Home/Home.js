@@ -390,25 +390,7 @@ function HomeCom(props) {
       });
   };
 
-  const searchSpace = (event) => {
 
-    let keyword = event.target.value;
-    SetSearch(keyword);
-  };
-
-  const handleUpdate = (id, val) => {
-    updateProductDataService(id, val)
-      .then((response) => {
-        setUsers((prevstate) => {
-          return prevstate.map((user) => {
-            return user.id === response.id ? { ...user, ...response } : user;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
 
 
   const row = Users.filter((row) => {

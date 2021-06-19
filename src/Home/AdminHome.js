@@ -11,6 +11,7 @@ import { getUser } from "../Utils/Common";
 import {
   deleteProductDataService,
   getAllProductData,
+  getPagenatedDataServise,
   updateProductDataService,
 } from "../services/addProductData";
 import "./Home.css";
@@ -21,7 +22,7 @@ function AdminHome(props) {
   const [Search, SetSearch] = useState("");
   const [Users, setUsers] = useState([]);
   const [temp, settemp] = useState({});
-
+  const [total, settotal] = useState(0);
   // const rows = Users?{...Users}
   const [edit, setEdit] = useState(["bankId", "allocatedToInspectorId"]);
 
@@ -224,13 +225,14 @@ function AdminHome(props) {
       id: "edit",
       label: "Edit",
       minWidth: 100,
-    },
+    }
+
   ]);
 
-  useEffect(() => {
-
-    getAllProductData()
+  const getPagenatedData = (pagenumber) => {
+    getPagenatedDataServise(pagenumber)
       .then((response) => {
+        settotal(response.total);
         const body = Object.values(response.data).map((val) => {
           return {
             ...val,
@@ -296,15 +298,8 @@ function AdminHome(props) {
               >
                 {" "}
                 edit
-                {/* <Edit data={val.id} /> */}
-                {/* <Modals
-                  editable={edit}
-                  onhandleUpdate={handleUpdate}
-                  name={"edit"}
-                  data={val}
-                /> */}
               </Button>
-            ),
+            )
           };
         });
 
@@ -346,15 +341,21 @@ function AdminHome(props) {
 
         // console.log(">>temp", temp);
 
-        setUsers(allu);
+        setUsers((preValues) => {
+      ;
+          return allu;
+        });
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");
       });
+  };
+  useEffect(() => {
+
+    getPagenatedData(0);
   }, []);
   const buttonClick = (e) => {
- 
-    // props.history.push("/addProductData");
+
     props.history.push({
       pathname: "/edit",
       search: "",
@@ -362,25 +363,10 @@ function AdminHome(props) {
     });
   };
 
-  const searchSpace = (event) => {
- ;
-    let keyword = event.target.value;
-    SetSearch(keyword);
-  };
 
-  const handleUpdate = (id, val) => {
-    updateProductDataService(id, val)
-      .then((response) => {
-        setUsers((prevstate) => {
-          return prevstate.map((user) => {
-            return user.id === response.id ? { ...user, ...response } : user;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
+
+
+
   const row = Users.filter((row) => {
     if (Search) {
       return row.productId
@@ -394,15 +380,12 @@ function AdminHome(props) {
   return (
     <div className="table">
       <div className="TextField">
-        <TextField
-          onChange={(e) => searchSpace(e)}
-          id="outlined-basic"
-          label="Search"
-          variant="outlined"
-        />
+  
       </div>
       <div className="table">
         <MaterialTable
+          total={total}
+          getPagenatedData={getPagenatedData}
           rows={row ? row : window.location.reload()}
           columns={columns}
         />
@@ -414,4 +397,6 @@ function AdminHome(props) {
     </div>
   );
 }
+
+
 export default withRouter(AdminHome);
