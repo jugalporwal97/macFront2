@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getToken } from "../Utils/Common";
-const hostURL = "http://18.216.109.16:3232";
+const hostURL = "https://apiv2.lokeshdangi.in/";
 
 export const getRequest = (endpoint) => {
   return new Promise((resolve, reject) => {
