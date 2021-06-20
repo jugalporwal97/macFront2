@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-console.log(`getUser()`, getUser().fullName)
+
 const UserNavBar = (props) => {
   const classes = useStyles();
 
@@ -31,7 +31,7 @@ const UserNavBar = (props) => {
         <Toolbar>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
             <Typography variant="h6" className={classes.title}>
-              Hi, {getUser().fullName}
+              Hi,{getUser() && getUser().fullName}
             </Typography>
           </Link>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>

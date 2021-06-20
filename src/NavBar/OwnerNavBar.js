@@ -29,7 +29,7 @@ const OwnerNavBar = (props) => {
         <Toolbar style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
             <Typography variant="h6" className={classes.title}>
-            Hi, {getUser().fullName}
+            Hi, {getUser() && getUser().fullName}
             </Typography>
           </Link>
           <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
