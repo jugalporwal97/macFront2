@@ -663,7 +663,7 @@ props.history.push({
 const handleDelete = (id) => {
   deleteProductDataService(id)
     .then((response) => {
-      window.location.reload()
+ alert("Deleted")
     })
     .catch((error) => {
       console.log("Something went wrong. Please try again later.");
