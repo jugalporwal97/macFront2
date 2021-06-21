@@ -72,7 +72,7 @@ function ShowStates() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllStates()

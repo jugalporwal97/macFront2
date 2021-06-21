@@ -82,7 +82,7 @@ function ShowMarketingPerson() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Users]);
 
   // useEffect(() => {
   //   getAllMarketingPerson()

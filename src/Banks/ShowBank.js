@@ -76,7 +76,7 @@ function ShowBank() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllBank()

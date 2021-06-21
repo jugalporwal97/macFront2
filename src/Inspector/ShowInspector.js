@@ -73,7 +73,7 @@ function ShowInspector() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
   // useEffect(() => {
   //   getAllInspector()
   //     .then((response) => {

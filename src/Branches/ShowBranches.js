@@ -92,7 +92,7 @@ function ShowBranches(props) {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [props?.value]);
+  }, [props?.value,Users]);
 
   const buttonClick = (e) => {
 

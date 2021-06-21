@@ -72,7 +72,7 @@ function ShowProducts() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllproducts()

@@ -73,7 +73,7 @@ function ShowSchemes() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllSchemes()

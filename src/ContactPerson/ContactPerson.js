@@ -64,7 +64,7 @@ function ContactPerson() {
   createContactPersonService(data)
       .then((response) => {
 
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");

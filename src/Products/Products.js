@@ -39,18 +39,18 @@ console.log()
   const submitForm = (e) => {
     e.preventDefault();
 
-    console.log("aaaa", FormGenerater);
+    // console.log("aaaa", FormGenerater);
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       acc[item.backendLabel] = item.formValue;
       return acc;
     }, {});
-    console.log("valuesss", data);
+  
 
     createproductsService(data)
       .then((response) => {
-        console.log(">>session", response);
-        window.location.reload();
+        // console.log(">>session", response);
+        // window.location.reload();
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");

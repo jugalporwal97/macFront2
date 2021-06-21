@@ -75,7 +75,7 @@ function ShowProcessDoneBy() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllProcessDoneBy()

@@ -44,7 +44,7 @@ function States() {
     createStateService(data)
       .then((response) => {
 
-        window.location.reload();
+        
       })
       .catch((error) => {
         console.log("Something went wrong. Please try again later.");

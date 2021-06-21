@@ -81,7 +81,7 @@ function ShowContactPerson() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Users]);
 
   // useEffect(() => {
   //   getAllContactPerson()

@@ -72,7 +72,7 @@ function ShowUnitTypes() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllunitTypes()

@@ -69,7 +69,7 @@ function ShowCategories() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllcategories()

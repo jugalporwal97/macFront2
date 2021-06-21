@@ -73,7 +73,7 @@ function ShowStatus() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, []);
+  }, [Cities]);
 
   // useEffect(() => {
   //   getAllStatus()
