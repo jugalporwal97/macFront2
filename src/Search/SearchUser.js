@@ -645,7 +645,7 @@ props.history.push({
 const handleDelete = (id) => {
   deleteProductDataService(id)
     .then((response) => {
-      window.location.reload()
+     
     })
     .catch((error) => {
       console.log("Something went wrong. Please try again later.");

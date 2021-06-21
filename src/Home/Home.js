@@ -412,7 +412,7 @@ function HomeCom(props) {
         <MaterialTable
           total={total}
           getPagenatedData={getPagenatedData}
-          rows={row ? row : window.location.reload()}
+          rows={row ? row :  <p></p>}
           columns={columns}
         />
         {/* <Paper className="container">

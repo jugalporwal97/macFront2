@@ -112,7 +112,7 @@ function ShowCategories() {
       <MaterialTable
         total={total}
         getPagenatedData={getPagenatedData}
-        rows={Cities ? Cities : window.location.reload()}
+        rows={Cities ? Cities :  <p></p>}
         columns={columns}
       />
     </div>

@@ -19,6 +19,7 @@ import { getAllSchemes } from "../services/schemes";
 import { getAllProcessDoneBy } from "../services/processDoneBy";
 import { withRouter } from "react-router";
 import MaterialTableWithoutpagination from "../Table/MaterialTableWithoutpagination";
+import { SimCardAlert } from "material-ui-icons";
 
 
 
@@ -675,7 +676,7 @@ props.history.push({
 const handleDelete = (id) => {
   deleteProductDataService(id)
     .then((response) => {
-      window.location.reload()
+    alert("Deleted.")
     })
     .catch((error) => {
       console.log("Something went wrong. Please try again later.");

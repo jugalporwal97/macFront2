@@ -142,7 +142,7 @@ function ShowBranches(props) {
       <MaterialTable
         total={total}
         getPagenatedData={getPagenatedData}
-        rows={Users ? Users : window.location.reload()}
+        rows={Users ? Users : <p></p>}
         columns={columns}
       />
     </div>
