@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "../Form/Form";
 
 import { createproductsService } from "../services/products";
+import { getUser } from "../Utils/Common";
 
 import ShowProducts from "./ShowProducts";
 
@@ -20,6 +21,7 @@ function Products() {
     },
   });
 
+  console.log(getUser())
 
   const updateForm = (e, id) => {
   
