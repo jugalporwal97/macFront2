@@ -4,8 +4,9 @@ import {
   deleteSchemesService,
   getAllSchemes,
   updateSchemesService,
+  getPagenatedSchemesDataServise,
 } from "../services/schemes";
-import { getPagenatedCityDataServise } from "../services/state";
+
 
 import MaterialTable from "../Table/Table";
 
@@ -33,7 +34,7 @@ function ShowSchemes() {
   ]);
 
   const getPagenatedData = (pagenumber) => {
-    getPagenatedCityDataServise(pagenumber)
+    getPagenatedSchemesDataServise(pagenumber)
       .then((response) => {
         settotal(response.total);
         const body = Object.values(response.data).map((value) => {

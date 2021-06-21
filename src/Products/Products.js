@@ -26,7 +26,6 @@ function Products() {
 console.log()
     const value = e.target.value;
 
-    console.log("bank",{value,id})
     setFormGenerator((prev) => {
       return {
         ...prev,

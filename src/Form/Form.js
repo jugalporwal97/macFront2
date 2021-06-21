@@ -65,7 +65,6 @@ function Form(props) {
           />
         ) : form.inputType === "date" ? (
           <React.Fragment>
-            {console.log("<<Date", form.formValue)}
             <TextField
               key={form.id}
               variant="outlined"

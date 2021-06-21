@@ -48,7 +48,7 @@ function Login(props) {
     authenticateUserService({ email: email, password: password })
       .then((response) => {
         setLoading(false);
-        console.log(">>session", response.accessToken);
+        // console.log(">>session", response.accessToken);
      
 
         setUserSession(response.accessToken, response.user);
@@ -56,8 +56,9 @@ function Login(props) {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status === 401)
-          setError(error.response.data.message);
+        if (error.response.status === 401){
+          alert("Please enter Correct EmailID Password.")
+          setError(error.response.data.message);}
         else setError("Something went wrong. Please try again later.");
       });
   };
