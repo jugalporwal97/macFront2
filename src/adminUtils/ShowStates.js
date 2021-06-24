@@ -2,12 +2,12 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import {
   deleteStateService,
-  getAllStates,
+
   getPagenatedCityDataServise,
   updateStateService,
 } from "../services/state";
 import MaterialTable from "../Table/Table";
-import { getUser } from "../Utils/Common";
+
 
 function ShowStates() {
   //   const [row, setrow] = useState(initialState);
@@ -16,7 +16,7 @@ function ShowStates() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Cities", minWidth: 170 },
     {
       id: "edit",
@@ -30,7 +30,7 @@ function ShowStates() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedCityDataServise(pagenumber)
@@ -72,7 +72,7 @@ function ShowStates() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllStates()

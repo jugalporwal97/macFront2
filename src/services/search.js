@@ -1,11 +1,9 @@
 import {
-    deleteRequest,
+
     getRequest,
-    patchRequest,
-    postRequest,
-  } from "./request";
-  export const pagesize = 50;
   
+  } from "./request";
+
   const ENDPOINT = "product-data-search";
 
   export const getSearch = (id) => {

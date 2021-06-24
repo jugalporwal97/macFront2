@@ -4,7 +4,7 @@ import "./Edit.css";
 
 import Form from "../Form/Form";
 import {
-  createProductDataService,
+  
   updateProductDataService,
 } from "../services/addProductData";
 import { getAllBank, getPagenatedBankDataServise } from "../services/bank";
@@ -12,7 +12,7 @@ import { getAllBranches, getPagenatedBranches } from "../services/branches";
 import { getAllcategories, getPagenatedCategoriesDataServise } from "../services/categories";
 import { getAllContactPerson, getPagenatedContactPersonDataServise } from "../services/contactPerson";
 import { getAllInspector, getPagenatedInspectorDataServise } from "../services/inspector";
-import { getAllMarketingPerson, getPagenatedMarketingPDataServise, getPagenatedMarketingPDataServisee } from "../services/marketingPerson";
+import { getAllMarketingPerson, getPagenatedMarketingPDataServise } from "../services/marketingPerson";
 import { getAllProcessDoneBy, getPagenatedProcessDonrByDataServise } from "../services/processDoneBy";
 import { getAllproducts, getPagenatedProductDataServise } from "../services/products";
 import { getAllSchemes, getPagenatedSchemesDataServise } from "../services/schemes";
@@ -20,7 +20,7 @@ import { getAllStates, getPagenatedCityDataServise } from "../services/state";
 import { getAllStatus, getPagenatedStatusDataServise } from "../services/status";
 import { getAllunitTypes, getPagenatedUnitDataServise } from "../services/unitTypes";
 
-import OwnerNavBar, { OwnerNavbar } from "../NavBar/OwnerNavBar";
+
 
 export default function Edit(props) {
   const location = useLocation();
@@ -953,19 +953,19 @@ export default function Edit(props) {
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       if (
-        item.name == "inwardDate" ||
-        item.name == "sanctionDate" ||
-        item.name == "lastDateOfApplication" ||
-        item.name == "lastDateForJit" ||
-        item.name == "lastDateForJitExtension" ||
-        item.name == "jitVisitDate" ||
-        item.name == "stateDate" ||
-        item.name == "referenceDate"
+        item.name === "inwardDate" ||
+        item.name === "sanctionDate" ||
+        item.name === "lastDateOfApplication" ||
+        item.name === "lastDateForJit" ||
+        item.name === "lastDateForJitExtension" ||
+        item.name === "jitVisitDate" ||
+        item.name === "stateDate" ||
+        item.name === "referenceDate"
       ) {
 
         item.formValue = new Date(item.formValue);
       }
-      if (item.formValue == "") {
+      if (item.formValue === "") {
         item.formValue = null;
       }
 

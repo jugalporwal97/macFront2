@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import {
   deleteunitTypesService,
-  getAllunitTypes,
+
   getPagenatedUnitDataServise,
   updateunitTypesService,
 } from "../services/unitTypes";
@@ -16,7 +16,7 @@ function ShowUnitTypes() {
   // const rows = Cities?{...Cities}
   const [total, settotal] = useState(0);
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "UnitTypes", minWidth: 170 },
     {
       id: "edit",
@@ -30,7 +30,7 @@ function ShowUnitTypes() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedUnitDataServise(pagenumber)
@@ -72,7 +72,7 @@ function ShowUnitTypes() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllunitTypes()

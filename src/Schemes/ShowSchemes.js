@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import {
   deleteSchemesService,
-  getAllSchemes,
+
   updateSchemesService,
   getPagenatedSchemesDataServise,
 } from "../services/schemes";
@@ -17,7 +17,7 @@ function ShowSchemes() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Schemes", minWidth: 170 },
     {
       id: "edit",
@@ -31,7 +31,7 @@ function ShowSchemes() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedSchemesDataServise(pagenumber)
@@ -73,7 +73,7 @@ function ShowSchemes() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllSchemes()

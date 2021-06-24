@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import {
   deleteproductsService,
-  getAllproducts,
+
   getPagenatedProductDataServise,
   updateproductsService,
 } from "../services/products";
@@ -17,7 +17,7 @@ function ShowProducts() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Products", minWidth: 170 },
     {
       id: "edit",
@@ -31,7 +31,7 @@ function ShowProducts() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedProductDataServise(pagenumber)
@@ -72,7 +72,7 @@ function ShowProducts() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllproducts()

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import {
   deleteStatusService,
-  getAllStatus,
+
   getPagenatedStatusDataServise,
   updateStatusService,
 } from "../services/status";
@@ -16,7 +16,7 @@ function ShowStatus() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Status", minWidth: 170 },
     {
       id: "edit",
@@ -30,7 +30,7 @@ function ShowStatus() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedStatusDataServise(pagenumber)
@@ -73,7 +73,7 @@ function ShowStatus() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllStatus()

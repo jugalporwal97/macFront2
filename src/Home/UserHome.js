@@ -1,30 +1,27 @@
-import React, { Component, useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import React, { useState, useEffect } from "react";
+
 
 import "moment-timezone";
 
 import Moment from "react-moment";
-import Modals from "../Modals/Modals";
+
 import MaterialTable from "../Table/Table";
-import { getUser } from "../Utils/Common";
+
 import {
-  deleteProductDataService,
-  getAllProductData,
-  getPagenatedDataServise,
-  updateProductDataService,
+
+  getPagenatedDataServise
+
 } from "../services/addProductData";
 import "./Home.css";
 import { withRouter } from "react-router";
-import Edit from "../Edit/Edit";
+
 
 function UserHome(props) {
   const [Search, SetSearch] = useState("");
   const [Users, setUsers] = useState([]);
-  const [temp, settemp] = useState({});
+
   const [total, settotal] = useState(0);
-  // const rows = Users?{...Users}
-  const [edit, setEdit] = useState(["bankId", "allocatedToInspectorId"]);
+
 
   const [columns, setColumns] = useState([
     {

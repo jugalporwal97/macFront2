@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 
 export default function Modals(props) {
   const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState("paper");
+  const scroll="paper"
   const [val, setval] = React.useState(props.data);
 
 

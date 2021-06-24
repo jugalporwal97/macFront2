@@ -1,12 +1,12 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
-import Modals from "../Modals/Modals";
+
 import {
   deleteBranchesService,
-  getAllBranches,
+  
   getPagenatedBranches,
-  updateBranchesService,
+  
 } from "../services/branches";
 
 import MaterialTable from "../Table/Table";
@@ -18,9 +18,9 @@ function ShowBranches(props) {
   const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
-  const [edit, setEdit] = useState(["name", "bankId"]);
+ 
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "BranchName", minWidth: 150 },
     { id: "bankId", label: "Bank", minWidth: 150 },
     {
@@ -33,7 +33,7 @@ function ShowBranches(props) {
       label: "Delete",
       minWidth: 150,
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedBranches(pagenumber)
@@ -42,7 +42,7 @@ function ShowBranches(props) {
         const body = Object.values(response.data).map((val) => {
           return {
             ...val,
-            bankId: props?.value.find((obj) => obj.val == val.bankId)?.payload,
+            bankId: props?.value.find((obj) => obj.val === val.bankId)?.payload,
             edit: (
               // <Button variant="contained" color="primary">
               //   <Modals
@@ -92,11 +92,11 @@ function ShowBranches(props) {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [props?.value,Users]);
+  }, [props?.value]);
 
   const buttonClick = (e) => {
 
-    // props.history.push("/addProductData");
+
     props.history.push({
       pathname: "/editBank",
       search: "",
@@ -123,19 +123,7 @@ function ShowBranches(props) {
         console.log("Something went wrong. Please try again later.");
       });
   };
-  const handleUpdate = (id, val) => {
-    updateBranchesService(id, val)
-      .then((response) => {
-        setUsers((prevstate) => {
-          return prevstate.map((user) => {
-            return user.id === response.id ? { ...user, ...response } : user;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
+
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>

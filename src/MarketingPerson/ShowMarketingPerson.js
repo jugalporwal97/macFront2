@@ -4,7 +4,7 @@ import Modals from "../Modals/Modals";
 
 import {
   deleteMarketingPersonService,
-  getAllMarketingPerson,
+
   getPagenatedMarketingPDataServise,
   updateMarketingPersonService,
 } from "../services/marketingPerson";
@@ -18,9 +18,9 @@ function ShowMarketingPerson() {
   // const rows = Users?{...Users}
   const [total, settotal] = useState(0);
 
-  const [edit, setEdit] = useState(["name", "contact"]);
+  const edit=["name", "contact"]
 
-  const [columns, setColumns] = useState([
+  const columns= [
     { id: "name", label: "Marketing Person", minWidth: 150 },
     { id: "contact", label: "Contact", minWidth: 150 },
     {
@@ -33,7 +33,7 @@ function ShowMarketingPerson() {
       label: "Delete",
       minWidth: 150,
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedMarketingPDataServise(pagenumber)
@@ -82,13 +82,9 @@ function ShowMarketingPerson() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Users]);
+  }, []);
 
-  // useEffect(() => {
-  //   getAllMarketingPerson()
-  //     .then((response) => {
 
-  // }, []);
 
   const handleDelete = (id) => {
     deleteMarketingPersonService(id)

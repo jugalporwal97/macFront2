@@ -1,40 +1,27 @@
-import React, { Component, useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
+
 import "./App.css";
-import MaterialTable from "./Table/Table";
+
 import Login from "./Login/Login";
 import { Route } from "react-router";
-import Form from "./Form/Form";
+
 import AdminPannel from "./AdminPannel/AdminPannel";
-import States from "./adminUtils/States";
-import ShowStates from "./adminUtils/ShowStates";
+
 import OwnerNavBar from "./NavBar/OwnerNavBar";
 import UserNavBar from "./NavBar/UserNavBar";
 import { Switch } from "react-router-dom";
 import CreateProduct from "./CreateProduct/CreateProduct";
 import AddProductData from "./AddProductData/AddProductData";
 import UserDetails from "./UserDetails/UserDetails";
-import UserLogs from "./UserLogs/UserLogs";
+
 import AccessManager from "./AccessManager/AccessManager";
-import Modals from "./Modals/Modals";
-import Moment from "react-moment";
+
 import Edit from "./Edit/Edit";
 import EditBank from "./Edit/EditBank";
 import "moment-timezone";
-import {
-  deleteBranchesService,
-  getAllBranches,
-  updateBranchesService,
-} from "./services/branches";
-import {
-  deleteProductDataService,
-  getAllProductData,
-  updateProductDataService,
-} from "./services/addProductData";
-import Bank from "./Banks/Bank";
+
 import { getUser } from "./Utils/Common";
 import HomeCom from "./Home/Home";
 import AdminNavBar from "./NavBar/AdminNavBar";
@@ -67,14 +54,14 @@ function App() {
             path="/AdminPannel"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <AdminPannel />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -99,14 +86,14 @@ function App() {
             path="/search"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <Search />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -130,14 +117,14 @@ function App() {
             path="/createProduct"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <CreateProduct />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -161,14 +148,14 @@ function App() {
             path="/userDetails"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <UserDetails />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -192,14 +179,14 @@ function App() {
             path="/addProductData"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <AddProductData />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -223,14 +210,14 @@ function App() {
             path="/edit"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <Edit />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -253,14 +240,14 @@ function App() {
             path="/editBank"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <EditBank />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -283,14 +270,14 @@ function App() {
             path="/accessManager"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <AccessManager />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">
@@ -315,14 +302,14 @@ function App() {
             path="/Home"
             render={() => (
               <React.Fragment>
-                {getUser().type == 1 ? (
+                {getUser().type === 1 ? (
                   <div>
                     <OwnerNavBar />
                     <div className="">
                       <HomeCom />
                     </div>
                   </div>
-                ) : getUser().type == 2 ? (
+                ) : getUser().type === 2 ? (
                   <div>
                     <AdminNavBar />
                     <div className="">

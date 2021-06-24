@@ -6,7 +6,7 @@ import { getAllBranches, getPagenatedBranches } from "../services/branches";
 import { getAllcategories, getPagenatedCategoriesDataServise } from "../services/categories";
 import { getAllContactPerson, getPagenatedContactPersonDataServise } from "../services/contactPerson";
 import { getAllInspector, getPagenatedInspectorDataServise } from "../services/inspector";
-import { getAllMarketingPerson, getPagenatedMarketingPDataServise, getPagenatedMarketingPDataServisee } from "../services/marketingPerson";
+import { getAllMarketingPerson, getPagenatedMarketingPDataServise } from "../services/marketingPerson";
 import { getAllProcessDoneBy, getPagenatedProcessDonrByDataServise } from "../services/processDoneBy";
 import { getAllproducts, getPagenatedProductDataServise } from "../services/products";
 import { getAllSchemes, getPagenatedSchemesDataServise } from "../services/schemes";
@@ -755,19 +755,19 @@ function AddProductData() {
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       if (
-        item.name == "inwardDate" ||
-        item.name == "sanctionDate" ||
-        item.name == "lastDateOfApplication" ||
-        item.name == "lastDateForJit" ||
-        item.name == "lastDateForJitExtension" ||
-        item.name == "jitVisitDate" ||
-        item.name == "stateDate" ||
-        item.name == "referenceDate"
+        item.name === "inwardDate" ||
+        item.name === "sanctionDate" ||
+        item.name === "lastDateOfApplication" ||
+        item.name === "lastDateForJit" ||
+        item.name === "lastDateForJitExtension" ||
+        item.name === "jitVisitDate" ||
+        item.name === "stateDate" ||
+        item.name === "referenceDate"
       ) {
   
         item.formValue = new Date(item.formValue);
       }
-      if (item.formValue == "") {
+      if (item.formValue === "") {
         item.formValue = null;
       }
 

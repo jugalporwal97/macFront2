@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Form from "../Form/Form";
 import { createUseraccessService } from "../services/access";
-import { createProductDataService } from "../services/addProductData";
-import { getAllBank } from "../services/bank";
-import { getAllBranches } from "../services/branches";
-import { getAllcategories } from "../services/categories";
-import { getAllContactPerson } from "../services/contactPerson";
-import { getAllInspector } from "../services/inspector";
-import { getAllMarketingPerson } from "../services/marketingPerson";
-import { getAllProcessDoneBy } from "../services/processDoneBy";
+
 import { getAllproducts } from "../services/products";
 
-import { getAllSchemes } from "../services/schemes";
-import { getAllStates } from "../services/state";
-import { getAllStatus } from "../services/status";
-import { getAllunitTypes } from "../services/unitTypes";
+
 import { showUserService } from "../services/users";
-import { getUser } from "../Utils/Common";
+
 import ShowAccess from "./ShowAccess";
 
 function AccessManager() {
@@ -159,16 +149,16 @@ function AccessManager() {
     e.preventDefault();
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
-      if (item.formValue == "" && item.id == "productId") {
+      if (item.formValue === "" && item.id === "productId") {
         item.formValue = 1;
       }
-      if (item.formValue == "" && item.id == "write") {
+      if (item.formValue === "" && item.id === "write") {
         item.formValue = true;
       }
-      if (item.formValue == "" && item.id == "update") {
+      if (item.formValue === "" && item.id === "update") {
         item.formValue = true;
       }
-      if (item.formValue == "" && item.id == "remove") {
+      if (item.formValue === "" && item.id === "remove") {
         item.formValue = true;
       }
 

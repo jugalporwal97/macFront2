@@ -1,7 +1,7 @@
-import { Button } from "@material-ui/core";
+
 import React, { useState, useEffect } from "react";
-import Modals from "../Modals/Modals";
-import { deletelogsService, getAlllogs, updatelogsService } from "../services/logs";
+
+import {  getAlllogs } from "../services/logs";
 
 
 import MaterialTable from "../Table/Table";
@@ -13,11 +13,11 @@ function ShowLogs() {
   // const rows = Users?{...Users}
 
 
-  const [columns, setColumns] = useState([
+  const columns = [
 
     { id: "userId", label: "UserId", minWidth: 150 }
     
-  ]);
+  ];
 
   useEffect(() => {
     getAlllogs()
@@ -38,36 +38,6 @@ function ShowLogs() {
         console.log("Something went wrong. Please try again later.");
       });
   }, []);
-
-  const handleDelete = (id) => {
-   
-    deletelogsService(id)
-      .then((response) => {
-        setUsers((prevstate) => {
-          return prevstate.filter((user) => {
-            return user.id !== response.id;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
-  const handleUpdate = (id,val) => {
-    
-    updatelogsService(id, val)
-      .then((response) => {
-       
-        setUsers((prevstate) => {
-          return prevstate.map((user) => {
-            return user.id === response.id ? {...user,...response} : user;
-          });
-        });
-      })
-      .catch((error) => {
-        console.log("Something went wrong. Please try again later.");
-      });
-  };
 
   return (
     <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>

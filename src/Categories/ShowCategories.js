@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import {
   deletecategoriesService,
-  getAllcategories,
+
   getPagenatedCategoriesDataServise,
   updatecategoriesService,
 } from "../services/categories";
@@ -15,7 +15,7 @@ function ShowCategories() {
   const [total, settotal] = useState(0);
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Categories", minWidth: 170 },
     {
       id: "edit",
@@ -29,7 +29,7 @@ function ShowCategories() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
   const getPagenatedData = (pagenumber) => {
     getPagenatedCategoriesDataServise(pagenumber)
       .then((response) => {
@@ -69,13 +69,9 @@ function ShowCategories() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
-  // useEffect(() => {
-  //   getAllcategories()
-  //     .then((response) => {
 
-  // }, []);
 
   const handleDelete = (id) => {
     deletecategoriesService(id)

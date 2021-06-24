@@ -5,7 +5,7 @@ import "./Edit.css";
 import Form from "../Form/Form";
 import { updateBranchesService } from "../services/branches";
 import { getAllBank, getPagenatedBankDataServise } from "../services/bank";
-import { getAllBranches } from "../services/branches";
+
 
 function EditBank(props) {
   const location = useLocation();
@@ -130,19 +130,19 @@ function EditBank(props) {
 
     const data = Object.values(FormGenerater).reduce((acc, item) => {
       if (
-        item.name == "inwardDate" ||
-        item.name == "sanctionDate" ||
-        item.name == "lastDateOfApplication" ||
-        item.name == "lastDateForJit" ||
-        item.name == "lastDateForJitExtension" ||
-        item.name == "jitVisitDate" ||
-        item.name == "stateDate" ||
-        item.name == "referenceDate"
+        item.name === "inwardDate" ||
+        item.name === "sanctionDate" ||
+        item.name === "lastDateOfApplication" ||
+        item.name === "lastDateForJit" ||
+        item.name === "lastDateForJitExtension" ||
+        item.name === "jitVisitDate" ||
+        item.name === "stateDate" ||
+        item.name === "referenceDate"
       ) {
   
         item.formValue = new Date(item.formValue);
       }
-      if (item.formValue == "") {
+      if (item.formValue === "") {
         item.formValue = null;
       }
 
@@ -150,7 +150,7 @@ function EditBank(props) {
       return acc;
     }, {});
 
-    // const temp = Object.values(branchData).filter((b) => b.id == data.branchId);
+    // const temp = Object.values(branchData).filter((b) => b.id === data.branchId);
     // const temp2 = temp.map((t) => t.name).join("");
 
     // const data2 = { bankId: data.bankId, name: temp2 };

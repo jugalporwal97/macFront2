@@ -1,10 +1,10 @@
-import { deleteProductDataService, getAllProductData, getAllProductDataById } from "../services/addProductData";
-import React, { Component, useState, useEffect } from "react";
+
+import React, {  useState, useEffect } from "react";
 import Moment from "react-moment";
 import {getAllunitTypes, getPagenatedUnitDataServise} from "../services/unitTypes"
-import MaterialTable from "../Table/Table";
+
 import "moment-timezone";
-import { Button, TextField } from "@material-ui/core";
+import {  TextField } from "@material-ui/core";
 import { getSearch } from "../services/search";
 import { getAllproducts } from "../services/products";
 import { getAllInspector } from "../services/inspector";
@@ -39,7 +39,7 @@ function SearchUser(props) {
   const [Catid, setCatid] = useState([]);
   const [Shid, setShid] = useState([]);
   const [proid, setproid] = useState([]);
-  const [columns, setColumns] = useState([
+  const columns=[
     {
       id: "productId",
       label: "Product",
@@ -233,7 +233,7 @@ function SearchUser(props) {
       label: "Last Claim Quarter",
       minWidth: 100,
     }
-  ]);
+  ]
   useEffect(() => {
     getAllproducts()
       .then((response) => {
@@ -508,68 +508,68 @@ useEffect(() => {
 
 // searchresult && console.log("searchresult",searchresult)
 
-// searchresult && console.log("searchresult",((pid.filter((v)=>v.val== 5))[0])&& ((pid.filter((v)=>v.val== 5))[0]).payload)
+// searchresult && console.log("searchresult",((pid.filter((v)=>v.val=== 5))[0])&& ((pid.filter((v)=>v.val=== 5))[0]).payload)
 const body2 = searchresult.response
 for (const key in body2 ) {
 
 
-let producttest = (pid.filter((v)=>v.val== body2[key].productId))[0]
+let producttest = (pid.filter((v)=>v.val=== body2[key].productId))[0]
  if(producttest){
 body2[key].productId = producttest.payload
  }
 
- let bankIdtest = (bid.filter((v)=>v.val== body2[key].bankId))[0]
+ let bankIdtest = (bid.filter((v)=>v.val=== body2[key].bankId))[0]
  if(bankIdtest){
 body2[key].bankId = bankIdtest.payload
  }
 
- let cityIdtest = (cid.filter((v)=>v.val== body2[key].cityId))[0]
+ let cityIdtest = (cid.filter((v)=>v.val=== body2[key].cityId))[0]
  if(cityIdtest){
 body2[key].cityId = cityIdtest.payload
  }
 
- let statusIdtest = (stid.filter((v)=>v.val== body2[key].statusId))[0]
+ let statusIdtest = (stid.filter((v)=>v.val=== body2[key].statusId))[0]
  if(statusIdtest){
 body2[key].statusId = statusIdtest.payload
  }
  
- let schemeIdtest = (Shid.filter((v)=>v.val== body2[key].schemeId))[0]
+ let schemeIdtest = (Shid.filter((v)=>v.val=== body2[key].schemeId))[0]
  if(schemeIdtest){
 body2[key].schemeId = schemeIdtest.payload
  }
 
- let branchIdtest = (braid.filter((v)=>v.val== body2[key].branchId))[0]
+ let branchIdtest = (braid.filter((v)=>v.val=== body2[key].branchId))[0]
  if(branchIdtest){
 body2[key].branchId = branchIdtest.payload
  }
 
  
- let contactPersonIdtest = (contactid.filter((v)=>v.val== body2[key].contactPersonId))[0]
+ let contactPersonIdtest = (contactid.filter((v)=>v.val=== body2[key].contactPersonId))[0]
  if(contactPersonIdtest){
 body2[key].contactPersonId = contactPersonIdtest.payload
  }
   
- let marketingPersonIdtest = (mpid.filter((v)=>v.val== body2[key].marketingPersonId))[0]
+ let marketingPersonIdtest = (mpid.filter((v)=>v.val=== body2[key].marketingPersonId))[0]
  if(marketingPersonIdtest){
 body2[key].marketingPersonId = marketingPersonIdtest.payload
  }
 
- let processDoneByIdtest = (proid.filter((v)=>v.val== body2[key].processDoneById))[0]
+ let processDoneByIdtest = (proid.filter((v)=>v.val=== body2[key].processDoneById))[0]
  if(processDoneByIdtest){
 body2[key].processDoneById = processDoneByIdtest.payload
  }
 
- let Catidtest = (Catid.filter((v)=>v.val== body2[key].categoryId))[0]
+ let Catidtest = (Catid.filter((v)=>v.val=== body2[key].categoryId))[0]
  if(Catidtest){
 body2[key].categoryId = Catidtest.payload
  }
 
- let unitTypeIdtest = (InspectorId.filter((v)=>v.val== body2[key].unitTypeId))[0]
+ let unitTypeIdtest = (InspectorId.filter((v)=>v.val=== body2[key].unitTypeId))[0]
  if(unitTypeIdtest){
 body2[key].unitTypeId = unitTypeIdtest.payload
  }
 
- let allocatedToInspectorIdtest = (uid.filter((v)=>v.val== body2[key].allocatedToInspectorId))[0]
+ let allocatedToInspectorIdtest = (uid.filter((v)=>v.val=== body2[key].allocatedToInspectorId))[0]
  if(allocatedToInspectorIdtest){
 body2[key].allocatedToInspectorId = allocatedToInspectorIdtest.payload
  }
@@ -631,26 +631,6 @@ body2[key].inwardSlip &&  body2[key].inwardSlip === true
 
 } 
 
-const buttonClick = async (e) => {
-
-const body = await getAllProductDataById(e).then( response => response)
-
-
-props.history.push({
-  pathname: "/edit",
-  search: "",
-  state: { detail: body },
-});
-};
-const handleDelete = (id) => {
-  deleteProductDataService(id)
-    .then((response) => {
-     
-    })
-    .catch((error) => {
-      console.log("Something went wrong. Please try again later.");
-    });
-};
 
 
   return (

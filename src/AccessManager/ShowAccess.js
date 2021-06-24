@@ -1,16 +1,12 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import Modals from "../Modals/Modals";
+
 import {
   deleteUseraccessDataService,
-  getAllUseraccessData,
+
   getPagenatedaccessDataServise,
 } from "../services/access";
-import {
-  deleteBranchesService,
-  getAllBranches,
-  updateBranchesService,
-} from "../services/branches";
+
 
 import MaterialTable from "../Table/Table";
 
@@ -21,9 +17,9 @@ function ShowAccess(props) {
   const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
-  const [edit, setEdit] = useState(["name", "bankId"]);
 
-  const [columns, setColumns] = useState([
+
+  const columns=[
     { id: "userId", label: "User", minWidth: 150 },
 
     {
@@ -31,7 +27,7 @@ function ShowAccess(props) {
       label: "Delete",
       minWidth: 150,
     },
-  ]);
+  ]
   const getPagenatedData = (pagenumber) => {
     getPagenatedaccessDataServise(pagenumber)
       .then((response) => {
@@ -40,7 +36,7 @@ function ShowAccess(props) {
           return {
             ...val,
 
-            userId: props?.value.find((obj) => obj.val == val.userId)?.payload,
+            userId: props?.value.find((obj) => obj.val === val.userId)?.payload,
 
             delete: (
               <Button

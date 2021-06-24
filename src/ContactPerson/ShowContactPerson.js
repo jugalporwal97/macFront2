@@ -4,7 +4,7 @@ import Modals from "../Modals/Modals";
 
 import {
   deleteContactPersonService,
-  getAllContactPerson,
+
   getPagenatedContactPersonDataServise,
   updateContactPersonService,
 } from "../services/contactPerson";
@@ -16,10 +16,10 @@ function ShowContactPerson() {
   const [Users, setUsers] = useState([]);
 
   // const rows = Users?{...Users}
-  const [edit, setEdit] = useState(["name", "contact"]);
+  const edit=["name", "contact"]
   const [total, settotal] = useState(0);
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Contact Person", minWidth: 150 },
     { id: "contact", label: "Contact", minWidth: 150 },
     {
@@ -32,7 +32,7 @@ function ShowContactPerson() {
       label: "Delete",
       minWidth: 150,
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedContactPersonDataServise(pagenumber)
@@ -63,15 +63,7 @@ function ShowContactPerson() {
           };
         });
 
-        // console.log(
-        //   body.map((bof) => {
-        //     return bof.type === 1
-        //       ? (bof.type = "OWNER")
-        //       : bof.type === 2
-        //       ? (bof.type = "ADMIN")
-        //       : (bof.type = "USER");
-        //   })
-        // );
+  
 
         setUsers(body);
       })
@@ -81,52 +73,8 @@ function ShowContactPerson() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Users]);
+  }, []);
 
-  // useEffect(() => {
-  //   getAllContactPerson()
-  //     .then((response) => {
-  //       const body = Object.values(response.data).map((value) => {
-  //         return {
-  //           ...value,
-  //           edit: (
-  //             <Button variant="contained" color="primary">
-  //               <Modals
-  //                 editable={edit}
-  //                 onhandleUpdate={handleUpdate}
-  //                 name={"edit"}
-  //                 data={value}
-  //               />
-  //             </Button>
-  //           ),
-  //           delete: (
-  //             <Button
-  //               onClick={() => handleDelete(value.id)}
-  //               variant="contained"
-  //               color="secondary"
-  //             >
-  //               Delete
-  //             </Button>
-  //           ),
-  //         };
-  //       });
-
-  //       // console.log(
-  //       //   body.map((bof) => {
-  //       //     return bof.type === 1
-  //       //       ? (bof.type = "OWNER")
-  //       //       : bof.type === 2
-  //       //       ? (bof.type = "ADMIN")
-  //       //       : (bof.type = "USER");
-  //       //   })
-  //       // );
-
-  //       setUsers(body);
-  //     })
-  //     .catch((error) => {
-  //       console.log("Something went wrong. Please try again later.");
-  //     });
-  // }, []);
 
   const handleDelete = (id) => {
     deleteContactPersonService(id)

@@ -2,15 +2,11 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import {
   deleteBankService,
-  getAllBank,
+
   getPagenatedBankDataServise,
   updateBankService,
 } from "../services/bank";
-import {
-  deleteStateService,
-  getAllStates,
-  updateStateService,
-} from "../services/state";
+
 import MaterialTable from "../Table/Table";
 
 function ShowBank() {
@@ -20,7 +16,7 @@ function ShowBank() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Banks", minWidth: 170 },
     {
       id: "edit",
@@ -34,7 +30,7 @@ function ShowBank() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedBankDataServise(pagenumber)
@@ -76,7 +72,7 @@ function ShowBank() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllBank()

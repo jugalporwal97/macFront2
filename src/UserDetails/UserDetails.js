@@ -5,7 +5,7 @@ import Modals from "../Modals/Modals";
 import {
   deleteUserService,
   getPagenatedUsersDataServise,
-  showUserService,
+
   updateuserService,
 } from "../services/users";
 import MaterialTable from "../Table/Table";
@@ -16,9 +16,9 @@ function UserDetails() {
   const [total, settotal] = useState(0);
 
   // const rows = Users?{...Users}
-  const [edit, setEdit] = useState(["fullName", "email"]);
+  const edit=["fullName", "email"]
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "email", label: "Email", minWidth: 150 },
     { id: "fullName", label: "FullName", minWidth: 150 },
     { id: "type", label: "Rights", minWidth: 150 },
@@ -32,7 +32,7 @@ function UserDetails() {
       label: "Delete",
       minWidth: 150,
     },
-  ]);
+  ]
   const getPagenatedData = (pagenumber) => {
     getPagenatedUsersDataServise(pagenumber)
       .then((response) => {

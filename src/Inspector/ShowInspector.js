@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import {
   deleteInspectorService,
-  getAllInspector,
+
   getPagenatedInspectorDataServise,
   updateInspectorService,
 } from "../services/inspector";
@@ -17,7 +17,7 @@ function ShowInspector() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Inspector", minWidth: 170 },
     {
       id: "edit",
@@ -31,7 +31,7 @@ function ShowInspector() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
 
   const getPagenatedData = (pagenumber) => {
     getPagenatedInspectorDataServise(pagenumber)
@@ -73,7 +73,7 @@ function ShowInspector() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
   // useEffect(() => {
   //   getAllInspector()
   //     .then((response) => {

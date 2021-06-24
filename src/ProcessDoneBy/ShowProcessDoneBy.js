@@ -3,15 +3,11 @@ import React, { useState, useEffect } from "react";
 
 import {
   deleteProcessDoneByService,
-  getAllProcessDoneBy,
+
   getPagenatedProcessDonrByDataServise,
   updateProcessDoneByService,
 } from "../services/processDoneBy";
-import {
-  deleteStateService,
-  getAllStates,
-  updateStateService,
-} from "../services/state";
+
 import MaterialTable from "../Table/Table";
 
 function ShowProcessDoneBy() {
@@ -20,7 +16,7 @@ function ShowProcessDoneBy() {
 
   // const rows = Cities?{...Cities}
 
-  const [columns, setColumns] = useState([
+  const columns=[
     { id: "name", label: "Process Done BY", minWidth: 170 },
     {
       id: "edit",
@@ -34,7 +30,7 @@ function ShowProcessDoneBy() {
       minWidth: 170,
       align: "right",
     },
-  ]);
+  ]
   const [total, settotal] = useState(0);
   const getPagenatedData = (pagenumber) => {
     getPagenatedProcessDonrByDataServise(pagenumber)
@@ -75,7 +71,7 @@ function ShowProcessDoneBy() {
   };
   useEffect(() => {
     getPagenatedData(0);
-  }, [Cities]);
+  }, []);
 
   // useEffect(() => {
   //   getAllProcessDoneBy()
